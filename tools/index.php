@@ -1,4 +1,5 @@
-<a href="../dashboard">Check out the dashboard beta here</a>
+<h1>Dashboard:</h1>
+<a href="../dashboard">Click here to enter the Dashboard page!</a>
 <?php
 function listdir($dir){
 	$dirstring = "";
