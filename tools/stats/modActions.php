@@ -1,6 +1,6 @@
 <h1>Actions Count</h1>
-<table border="1">
-<tr><th>Moderator</th><th>Count</th><th>Levels rated</th><th>Last time online</th></tr>
+<table border="2">
+<tr><th>Moderator</th><th>Count</th><th>Levels rated</th><th>Last time online</th><th>Moderator Type</th></tr>
 <?php
 //error_reporting(0);
 include "../../incl/lib/connection.php";

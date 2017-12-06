@@ -1,4 +1,4 @@
-<h1>VIP List</h1>
+<h1>Roles List</h1>
 <?php
 //error_reporting(0);
 include "../../incl/lib/connection.php";
