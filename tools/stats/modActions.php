@@ -1,6 +1,6 @@
 <h1>Actions Count</h1>
-<table border="2">
-<tr><th>Moderator</th><th>Count</th><th>Levels rated</th><th>Last time online</th><th>Moderator Type</th></tr>
+<table border="1">
+<tr><th>Moderator</th><th>Count</th><th>Levels rated</th><th>Last time online</th></tr>
 <?php
 //error_reporting(0);
 include "../../incl/lib/connection.php";
@@ -30,10 +30,9 @@ $result = $query->fetchAll();
 foreach($result as &$action){
 	//detecting mod
 	$account = $action["account"];
-	$query = $db->prepare("SELECT * FROM accounts WHERE accountID = :id");
+	$query = $db->prepare("SELECT userName FROM accounts WHERE accountID = :id");
 	$query->execute([':id'=>$account]);
-	$result2 = $query->fetchAll();
-	$account = $result2[0]["userName"];
+	$account = $query->fetchColumn();
 	//detecting action
 	$value = $action["value"];
 	$value2 = $action["value2"];

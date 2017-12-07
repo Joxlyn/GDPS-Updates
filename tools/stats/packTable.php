@@ -1,5 +1,5 @@
 <h1>MAP PACKS</h1>
-<table border="1"><tr><th>Original Number</th><th>ID</th><th>Name of Map Pack</th><th>Stars</th><th>Coins</th><th>Levels</th></tr>
+<table border="1"><tr><th>#</th><th>ID</th><th>Map Pack</th><th>Stars</th><th>Coins</th><th>Levels</th></tr>
 <?php
 //error_reporting(0);
 include "../../incl/lib/connection.php";
@@ -13,10 +13,10 @@ foreach($result as &$pack){
 	$x++;
 	foreach($lvlarray as &$lvl){
 		echo $lvl . " - ";
-		$query = $db->prepare("SELECT * FROM levels WHERE levelID = :levelID");
+		$query = $db->prepare("SELECT levelName FROM levels WHERE levelID = :levelID");
 		$query->execute([':levelID' => $lvl]);
-		$result2 = $query->fetchAll();
-		echo $result2[0]["levelName"] . ", ";
+		$levelName = $query->fetchColumn();
+		echo $levelName . ", ";
 	}
 	echo "</td></tr>";
 }
@@ -26,7 +26,7 @@ foreach($result as &$pack){
 ?>
 </table>
 <h1>GAUNTLETS</h1>
-<table border="1"><tr><th>Original Number</th><th>Type</th><th>Level 1</th><th>Level 2</th><th>Level 3</th><th>Level 4</th><th>Level 5</th></tr>
+<table border="1"><tr><th>#</th><th>Name</th><th>Level 1</th><th>Level 2</th><th>Level 3</th><th>Level 4</th><th>Level 5</th></tr>
 <?php
 //error_reporting(0);
 include "../../incl/lib/connection.php";
