@@ -19,4 +19,6 @@ echo "</ul><h1>The cron job (fixing CPs, autoban, etc.)</h1><ul>";
 echo "<li><a href='cron/cron.php'>cron.php</a></li>";
 echo "</ul><h1>Stats related tools</h1><ul>";
 echo listdir("stats");
+echo "</ul><h1>View your Accounts!</h1><ul>";
+echo listdir("data");
 ?>
