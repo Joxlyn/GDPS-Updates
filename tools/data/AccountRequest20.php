@@ -36,5 +36,5 @@
 <h1>Remember that the comments of colors depends on the color you assign to each role, for example, Normal Moderators = Green in Format R, G, B = 0,255,0</h1>
 <h2>Also with the last update of the php files, the commands like !featured, !daily, !weekly, !delete, etc, will no longer depend on isAdmin</h2>
 </body>
-<img src="https://firepowe.000webhostapp.com/gallery/gj_likesicon_001-ts1500262754.png" name="gj_likesicon_001" alt="gj_likesicon_001" />
+<img src="https://firepowe.000webhostapp.com/images/GJ_hammerIcon_001.png" name="gj_likesicon_001" alt="gj_likesicon_001" /><h1>=</h1><img src="https://firepowe.000webhostapp.com/images/modBadge_01_001.png" name="modBadge_01_001.png" alt="modBadge_01_001.png" /> <img src="https://firepowe.000webhostapp.com/images/modBadge_02_001.png" name="modBadge_02_001.png" alt="modBadge_02_001.png" /> <img src="https://firepowe.000webhostapp.com/images/GJ_completesIcon_001.png" name="GJ_completesIcon_001.png" alt="GJ_completesIcon_001.png" />
 </html>
