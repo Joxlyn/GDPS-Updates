@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "geometrydash";
+$username = "yourusername";
+$password = "yourpassword";
+$dbname = "yourdbname";
 ?>
