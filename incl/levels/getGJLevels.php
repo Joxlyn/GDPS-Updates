@@ -23,6 +23,9 @@ if(!is_numeric($gameVersion)){
 	exit("-1");
 }
 if($gameVersion == 20){
+if($_POST['binaryVersion']==36){
+    exit("-1");
+}    
 	$binaryVersion = $ep->remove($_POST["binaryVersion"]);
 	if($binaryVersion > 27){
 		$gameVersion++;
