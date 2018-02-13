@@ -58,15 +58,15 @@ if (filter_var($song, FILTER_VALIDATE_URL) == TRUE) {
 		//$count += $query->fetchColumn();
 	}
 	if($count != 0){
-		echo "This song already exists in our database.";
+		exit( "This song already exists in our database.");
 	}else{
 	    $query = $db->prepare("INSERT INTO songs (name, authorID, authorName, size, download, hash)
 		VALUES (:name, '9', :author, :size, :download, :hash)");
 		$query->execute([':name' => $name, ':download' => $song, ':author' => $author, ':size' => $size, ':hash' => $hash]);
-		echo "Song reuploaded: <b>".$db->lastInsertId()."</b><hr>";
+		exit ($db->lastInsertId());
 	}
 }else{
-	echo "The download link isn't a valid URL";
+	exit("The download link isn't a valid URL");
 }
 }
 	echo '<b>Soundcloud links</b> or <b>Direct links</b> or <b>Dropbox links</b> only accepted, <b><font size="5">NO YOUTUBE LINKS</font></b><br><form action="songAdd.php" method="post">Link: <input type="text" name="songlink"><br><input type="submit" value="Add Song"></form>';
