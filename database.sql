@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: localhost
--- Vytvořeno: Sob 09. pro 2017, 22:42
+-- Vytvořeno: Čtv 29. bře 2018, 19:23
 -- Verze serveru: 10.1.23-MariaDB-9+deb9u1
--- Verze PHP: 7.1.11-1+0~20171027135825.10+jessie~1.gbp2e638d
+-- Verze PHP: 7.1.12-1+0~20171129100725.11+jessie~1.gbp8ded15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -344,6 +344,17 @@ CREATE TABLE `modactions` (
 -- --------------------------------------------------------
 
 --
+-- Struktura tabulky `modipperms`
+--
+
+CREATE TABLE `modipperms` (
+  `categoryID` int(11) NOT NULL,
+  `actionFreeCopy` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabulky `modips`
 --
 
@@ -351,7 +362,8 @@ CREATE TABLE `modips` (
   `ID` int(11) NOT NULL,
   `IP` varchar(69) COLLATE utf8_unicode_ci NOT NULL,
   `isMod` int(11) NOT NULL,
-  `accountID` int(11) NOT NULL
+  `accountID` int(11) NOT NULL,
+  `modipCategory` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -435,6 +447,8 @@ CREATE TABLE `roles` (
   `commandUnlistAll` int(11) NOT NULL DEFAULT '0',
   `commandSharecpOwn` int(11) NOT NULL DEFAULT '1',
   `commandSharecpAll` int(11) NOT NULL DEFAULT '0',
+  `commandSongOwn` int(11) NOT NULL DEFAULT '1',
+  `commandSongAll` int(11) NOT NULL DEFAULT '0',
   `profilecommandDiscord` int(11) NOT NULL DEFAULT '1',
   `actionRateDemon` int(11) NOT NULL DEFAULT '0',
   `actionRateStars` int(11) NOT NULL DEFAULT '0',
@@ -444,6 +458,7 @@ CREATE TABLE `roles` (
   `toolPackcreate` int(11) NOT NULL DEFAULT '0',
   `toolModactions` int(11) NOT NULL DEFAULT '0',
   `dashboardModTools` int(11) NOT NULL DEFAULT '0',
+  `modipCategory` int(11) NOT NULL DEFAULT '0',
   `isDefault` int(11) NOT NULL DEFAULT '0',
   `commentColor` varchar(11) NOT NULL DEFAULT '000,000,000',
   `modBadgeLevel` int(11) NOT NULL
@@ -462,7 +477,7 @@ CREATE TABLE `songs` (
   `authorName` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `size` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `download` varchar(1337) COLLATE utf8_unicode_ci NOT NULL,
-  `hash` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `hash` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `isDisabled` int(11) NOT NULL DEFAULT '0',
   `levelsCount` int(11) NOT NULL DEFAULT '0',
   `reuploadTime` int(11) NOT NULL DEFAULT '0'
@@ -647,6 +662,12 @@ ALTER TABLE `modactions`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Klíče pro tabulku `modipperms`
+--
+ALTER TABLE `modipperms`
+  ADD PRIMARY KEY (`categoryID`);
+
+--
 -- Klíče pro tabulku `modips`
 --
 ALTER TABLE `modips`
@@ -797,6 +818,11 @@ ALTER TABLE `messages`
 --
 ALTER TABLE `modactions`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pro tabulku `modipperms`
+--
+ALTER TABLE `modipperms`
+  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pro tabulku `modips`
 --
