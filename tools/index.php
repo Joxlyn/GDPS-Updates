@@ -9,6 +9,7 @@ body
   height: 100%;
   position: relative;
 }
+
 a:link
 {
 	transition: all 0.25s;
@@ -23,10 +24,12 @@ a:hover
 	color: #ff00ff;
 }
 </style><center><h1>TOOLS</h1><hr><?php
+
 function getname($file)
 {
 	return str_replace('Mac O S', 'MacOS', str_replace('G D', 'GD', ucfirst(implode(' ', preg_split('/(?=[A-Z,0-25])/', str_replace('.php', '', $file))))));
 }
+
 function listdir($dir)
 {
 	$dirstring = array();
