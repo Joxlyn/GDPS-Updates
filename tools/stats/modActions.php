@@ -4,10 +4,7 @@
 <?php
 //error_reporting(0);
 include "../../incl/lib/connection.php";
-require "../../incl/lib/mainLib.php";
-$gs = new mainLib();
-$accounts = implode(",",$gs->getAccountsWithPermission("toolModactions"));
-$query = $db->prepare("SELECT accountID, userName FROM accounts WHERE accountID IN ($accounts) ORDER BY userName ASC");
+$query = $db->prepare("SELECT accountID, userName FROM accounts WHERE isAdmin = 1");
 $query->execute();
 $result = $query->fetchAll();
 foreach($result as &$mod){
@@ -33,9 +30,10 @@ $result = $query->fetchAll();
 foreach($result as &$action){
 	//detecting mod
 	$account = $action["account"];
-	$query = $db->prepare("SELECT userName FROM accounts WHERE accountID = :id");
+	$query = $db->prepare("SELECT * FROM accounts WHERE accountID = :id");
 	$query->execute([':id'=>$account]);
-	$account = $query->fetchColumn();
+	$result2 = $query->fetchAll();
+	$account = $result2[0]["userName"];
 	//detecting action
 	$value = $action["value"];
 	$value2 = $action["value2"];
@@ -82,14 +80,14 @@ foreach($result as &$action){
 		case 13:
 			$actionname = "Changed level description";
 			break;
-		case 15:
-			$actionname = "Un/banned a user";
+		case 14:
+			$actionname = "Changed level CP reward";
 			break;
 		default:
 			$actionname = $action["type"];
 			break;
 		}
-	if($action["type"] == 2 OR $action["type"] == 3 OR $action["type"] == 4 OR $action["type"] == 15){
+	if($action["type"] == 2 OR $action["type"] == 3 OR $action["type"] == 4){
 		if($action["value"] == 1){
 			$value = "True";
 		}else{
