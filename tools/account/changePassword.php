@@ -11,6 +11,7 @@ $ep = new exploitPatch();
 $userName = $ep->remove($_POST["userName"]);
 $oldpass = $_POST["oldpassword"];
 $newpass = $_POST["newpassword"];
+$salt = "";
 if($userName != "" AND $newpass != "" AND $oldpass != ""){
 $generatePass = new generatePass();
 $pass = $generatePass->isValidUsrname($userName, $oldpass);
@@ -39,8 +40,8 @@ if ($pass == 1) {
 	}
 	//creating pass hash
 	$passhash = password_hash($newpass, PASSWORD_DEFAULT);
-	$query = $db->prepare("UPDATE accounts SET password=:password WHERE userName=:userName");	
-	$query->execute([':password' => $passhash, ':userName' => $userName]);
+	$query = $db->prepare("UPDATE accounts SET password=:password, salt=:salt WHERE userName=:userName");	
+	$query->execute([':password' => $passhash, ':userName' => $userName, ':salt' => $salt]);
 	echo "Password changed. <a href='..'>Go back to tools</a>";
 }else{
 	echo "Invalid old password or nonexistent account. <a href='changePassword.php'>Try again</a>";
