@@ -21,4 +21,4 @@ Most of the stuff in generateHash.php has been figured out by pavlukivan and Ita
 
 Base: Cvolton
 
-Remastered: xXFireBlastXx
+Remastered: Joxlyn
