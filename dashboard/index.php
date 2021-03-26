@@ -46,7 +46,7 @@ foreach($months as &$month){
 	}
 }
 
-$dl->printPage('<p>Welcome to the Ryoulex GDPS dashboard. Please choose a tool above.
+$dl->printPage('<p>Welcome to the (Your Name) dashboard. Please choose a tool above.
 				<br>DISCLAIMER: THIS AREA IS UNDER HEAVY DEVELOPEMENT, DON\'T EXPECT MUCH STUFF TO WORK
 				<br>Legend: (N) = Not Working, (T) = Links to the legacy tool version
 				<br>
