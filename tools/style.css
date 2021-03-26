@@ -1,0 +1,335 @@
+@import url('https://fonts.googleapis.com/css?family=Karla');
+	
+html,  body
+{
+	height: 100%;
+	margin:0;
+	padding:0;
+}
+
+.iconic
+{
+	max-width: 456px;
+	position: absolute;
+	margin: auto;
+	left: 0;
+	right: 0;
+	top: -15%;
+	bottom: 0;
+	left: 56px;
+
+	-webkit-filter: drop-shadow( 0px 0px 16px #444 ); 
+    filter: drop-shadow( 0px 0px 16px #444 );
+}
+
+path
+{
+	fill: white;
+	transition: fill 300ms ease-out;
+	-webkit-transition: fill 300ms ease-out;
+}
+
+path:hover
+{
+	transition: fill 300ms ease-out;
+	-webkit-transition: fill 300ms ease-out;
+}
+
+.twitter:hover
+{
+	fill: #1DA1F2;
+}
+
+.discord:hover
+{
+	fill: #7289DA;
+}
+
+.youtube:hover
+{
+	fill: #ff0000;
+}
+body
+{
+	background: linear-gradient(to bottom, #000000 0%, #6fffff 100%);
+	background-attachment: fixed;
+}
+
+/*navigation*/
+
+.navd
+{
+	position: fixed;
+	top: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 50px;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 11;
+}
+
+.nav
+{
+	position: fixed;
+	top: 0;
+	font-family: "Karla";
+	overflow: hidden;
+	width: 100%;
+	height: 50px;
+
+	background: inherit;
+	background-color: color: hsl(240, 100%, 50%);
+}
+
+.nav a
+{
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+	transition: all 0.5s;
+	height: 50px;
+}
+
+.nav-left a
+{
+	float: left;
+}
+
+.nav-right a
+{
+	float: right;
+}
+
+.nav-centered
+{
+	float: none;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -18%);
+	z-index: 12;
+}
+
+.nav h1
+{
+	color: #fff;
+}
+
+.nav a:hover
+{
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #000;
+}
+
+/*footer*/
+
+.footerd
+{
+	position: fixed;
+	bottom: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 232px;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 11;
+}
+
+.footer
+{
+	text-align: center;
+	font-family: "Karla";
+	color: #fff;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 232px;
+	background-color: rgba(0, 0, 0, 0.5);
+	
+	z-index: 10;
+	background: inherit;
+}
+
+.footer a
+{
+	transition: all 0.5s;
+	color: #aaa;
+}
+
+.footer a:hover
+{
+	color: #fff;
+}
+
+
+/*store*/
+
+.smain
+{	
+	padding-top: 64px;
+	padding-bottom: 232px;
+	
+	z-index: 5;
+	overflow: auto;
+	
+	text-align: center;
+	font-family: "Karla";
+	color: #fff;
+}
+
+.nofooter
+{
+	padding-bottom: 0;
+}
+
+.smain a
+{
+	display: inline-block;
+	border-radius: 12px;
+	background-color: rgba(22, 22, 22, 0.5);
+	color: #f2f2f2;
+	font-size: 20px;
+	padding: 12px;
+	max-width: 256px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	text-decoration: none;
+}
+
+.smain a:hover
+{
+	transition: all 0.5s;
+	background-color: #ddd;
+	color: #000;
+}
+
+.smain table
+{
+	margin-left: auto; 
+    margin-right: auto;
+	width: 50%;
+	border: 0;
+}
+
+
+.smain th
+{
+	text-align: center;
+	font-size: 20px;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.smain tr:nth-child(even)
+{
+	background-color: rgba(0, 0, 0, 0.25);
+}
+
+.no-border th, .no-border tr:nth-child(even)
+{
+	background-color: transparent;
+}
+
+.smain img
+{
+	border: 1px solid #ddd;
+	padding: 1px;
+	border-radius: 50%;
+	max-width: 106px;
+	transition: all 0.5s;
+}
+
+.smain img:hover
+{
+	transform: rotate(360deg);
+}
+
+.nobox a
+{
+	border-radius: 0;
+	background-color: transparent;
+	color: #aaa;
+	font-size: 16px;
+	padding: 0;
+	margin: 0;
+	border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+	width: auto;
+}
+
+.nobox a:hover
+{
+	background-color: transparent;
+	color: #fff;
+}
+
+.darker
+{
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+/*forms*/
+
+.smain input[type=text], .smain input[type=password], .smain textarea
+{
+	display: inline-block;
+	border-radius: 12px;
+	background-color: rgba(22, 22, 22, 0.5);
+	color: #f2f2f2;
+	font-size: 20px;
+	padding: 12px;
+	width: 512px;
+	transition: all 0.5s;
+	margin: 5px;
+	text-decoration: none;
+	border: none;
+	
+	overflow: visible;
+}
+
+.smain input[type=text]:focus, .smain input[type=password]:focus, .smain input[type=text]:hover, .smain input[type=password]:hover, .smain textarea:focus, .smain textarea:hover
+{
+	transition: all 0.5s;
+	background-color: #ddd;
+	color: #000;
+}
+
+.smain input[type=submit]
+{
+	display: inline-block;
+	border-radius: 12px;
+	background-color: rgba(22, 22, 22, 0.5);
+	color: #f2f2f2;
+	font-size: 20px;
+	padding: 12px;
+	width: 164px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	text-decoration: none;
+	border: none;
+}
+
+.smain input[type=submit]:hover
+{
+	transition: all 0.5s;
+	background-color: #ddd;
+	color: #000;
+}
+
+.smain ul
+{
+	list-style: none;
+}
+
+pre
+{
+	top: 45px;
+	bottom: 227px;
+	color: #f2f2f2;
+	margin: 5px;
+	white-space: pre-wrap;
+
+	position: absolute;
+	overflow: auto;
+}
