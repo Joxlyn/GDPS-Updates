@@ -2,7 +2,7 @@
 ## Geometry Dash Private Server
 Basically a Geometry Dash Server Emulator
 
-Supported version of Geometry Dash: 1.0 - 2.11 (so any version of Geometry Dash works, as of writing this [December 10, 2017])
+Supported version of Geometry Dash: 1.0 - 2.11 (so any version of Geometry Dash works, as of writing this [25/03/2021])
 
 Required version of PHP: 5.4+ (tested up to 7.1.3)
 
@@ -19,6 +19,8 @@ Jscolor (color picker in packCreate.php) - http://jscolor.com/
 
 Most of the stuff in generateHash.php has been figured out by pavlukivan and Italian APK Downloader, so credits to them
 
-Base: Cvolton
+style.css created by Absolute
+
+Base: Cvolton https://github.com/Cvolton/GMDprivateServer
 
 Remastered: Joxlyn
