@@ -67,20 +67,36 @@ class Commands {
 			$query->execute([':value' => "1", ':timestamp' => $uploadDate, ':id' => $accountID, ':levelID' => $levelID]);
 			return true;
 		}
-			if(substr($comment,0,10) == '!legendary' AND $gs->checkPermission($accountID, "commandEpic")){
+		//new commands - Joxlyn
+			if(substr($comment,0,10) == '!legendary' AND $gs->checkPermission($accountID, "commandLegendary")){
 			$query = $db->prepare("UPDATE levels SET starEpic='2' WHERE levelID=:levelID");
 			$query->execute([':levelID' => $levelID]);
-			$query = $db->prepare("INSERT INTO modactions (type, value, value3, timestamp, account) VALUES ('4', :value, :levelID, :timestamp, :id)");
-			$query->execute([':value' => "2", ':timestamp' => $uploadDate, ':id' => $accountID, ':levelID' => $levelID]);
+			$query = $db->prepare("INSERT INTO modactions (type, value, value3, timestamp, account) VALUES ('999', :value, :levelID, :timestamp, :id)");
+			$query->execute([':value' => "1", ':timestamp' => $uploadDate, ':id' => $accountID, ':levelID' => $levelID]);
 			return true;
 		}
-			if(substr($comment,0,12) == '!unlegendary' AND $gs->checkPermission($accountID, "commandEpic")){
+			if(substr($comment,0,12) == '!unlegendary' AND $gs->checkPermission($accountID, "commandUnlegendary")){
 			$query = $db->prepare("UPDATE levels SET starEpic='0' WHERE levelID=:levelID");
 			$query->execute([':levelID' => $levelID]);
-			$query = $db->prepare("INSERT INTO modactions (type, value, value3, timestamp, account) VALUES ('4', :value, :levelID, :timestamp, :id)");
+			$query = $db->prepare("INSERT INTO modactions (type, value, value3, timestamp, account) VALUES ('999', :value, :levelID, :timestamp, :id)");
 			$query->execute([':value' => "0", ':timestamp' => $uploadDate, ':id' => $accountID, ':levelID' => $levelID]);
 			return true;
 		}
+		if(substr($comment,0,12) == '!chver 22' AND $gs->checkPermission($accountID, "commandChVer22")){
+			$query = $db->prepare("UPDATE levels SET gameVersion='22' WHERE levelID=:levelID");
+			$query->execute([':levelID' => $levelID]);
+			$query = $db->prepare("INSERT INTO modactions (type, value, value3, timestamp, account) VALUES ('1000', :value, :levelID, :timestamp, :id)");
+			$query->execute([':value' => "1", ':timestamp' => $uploadDate, ':id' => $accountID, ':levelID' => $levelID]);
+			return true;
+		}
+		if(substr($comment,0,12) == '!chver 21' AND $gs->checkPermission($accountID, "commandChVer21")){
+			$query = $db->prepare("UPDATE levels SET gameVersion='21' WHERE levelID=:levelID");
+			$query->execute([':levelID' => $levelID]);
+			$query = $db->prepare("INSERT INTO modactions (type, value, value3, timestamp, account) VALUES ('1000', :value, :levelID, :timestamp, :id)");
+			$query->execute([':value' => "0", ':timestamp' => $uploadDate, ':id' => $accountID, ':levelID' => $levelID]);
+			return true;
+		}
+		//end of new commands - Joxlyn
 		if(substr($comment,0,7) == '!unepic' AND $gs->checkPermission($accountID, "commandUnepic")){
 			$query = $db->prepare("UPDATE levels SET starEpic='0' WHERE levelID=:levelID");
 			$query->execute([':levelID' => $levelID]);
