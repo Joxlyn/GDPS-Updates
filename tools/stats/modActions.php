@@ -88,11 +88,17 @@ foreach($result as &$action){
 		case 15:
 			$actionname = "Un/banned a user";
 			break;
+		case 999:
+			$actionname = "Legendary change";
+			break;
+		case 1000:
+			$actionname = "Game version change";
+			break;
 		default:
 			$actionname = $action["type"];
 			break;
 		}
-	if($action["type"] == 2 OR $action["type"] == 3 OR $action["type"] == 4 OR $action["type"] == 15){
+	if($action["type"] == 2 OR $action["type"] == 3 OR $action["type"] == 4 OR $action["type"] == 15 OR $action["type"] == 999 OR $action["type"] == 1000){
 		if($action["value"] == 1){
 			$value = "True";
 		}else{
