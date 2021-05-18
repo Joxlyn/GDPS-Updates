@@ -44,6 +44,12 @@ foreach($result as $user){
 	$cpgain = $query3->fetchColumn();
 	$creatorpoints = $creatorpoints + $cpgain + $cpgain;
 	$cplog .= $user["userName"] . " - " . $creatorpoints . "\r\n";
+	//getting legendary lvls count
+	$query3 = $db->prepare("SELECT count(*) FROM levels WHERE userID = :userID AND starEpic = 2 AND isCPShared = 0");
+	$query3->execute([':userID' => $userID]);
+	$cpgain = $query3->fetchColumn();
+	$creatorpoints = $creatorpoints + $cpgain + $cpgain + $cpgain;
+	$cplog .= $user["userName"] . " - " . $creatorpoints . "\r\n";
 	//inserting cp value
 	if($creatorpoints != 0){
 		$people[$userID] = $creatorpoints;
