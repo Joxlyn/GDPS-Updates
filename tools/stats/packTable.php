@@ -1,5 +1,15 @@
-<h1>MAP PACKS</h1>
-<table border="1"><tr><th>#</th><th>ID</th><th>Map Pack</th><th>Stars</th><th>Coins</th><th>Levels</th></tr>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Map Packs/Gauntlets</title>
+		<link rel="stylesheet" href="../style.css"/>
+	</head>
+
+	<body>
+
+		<div class="smain nofooter">
+			<table><tr><th>#</th><th>Map Pack</th><th>Stars</th><th>Coins</th><th>Levels</th></tr>
+			<h1>MAP PACKS</h1>
 <?php
 //error_reporting(0);
 include "../../incl/lib/connection.php";
@@ -9,20 +19,19 @@ $query->execute();
 $result = $query->fetchAll();
 foreach($result as &$pack){
 	$lvlarray = explode(",", $pack["levels"]);
-	echo "<tr><td>$x</td><td>".$pack["ID"]."</td><td>".htmlspecialchars($pack["name"],ENT_QUOTES)."</td><td>".$pack["stars"]."</td><td>".$pack["coins"]."</td><td>";
+	echo "<tr><td>$x</td><td>".htmlspecialchars($pack["name"],ENT_QUOTES)."</td><td>".$pack["stars"]."</td><td>".$pack["coins"]."</td><td>";
 	$x++;
+	$tmp = "";
 	foreach($lvlarray as &$lvl){
 		echo $lvl . " - ";
-		$query = $db->prepare("SELECT levelName FROM levels WHERE levelID = :levelID");
+		$query = $db->prepare("SELECT * FROM levels WHERE levelID = :levelID");
 		$query->execute([':levelID' => $lvl]);
-		$levelName = $query->fetchColumn();
-		echo $levelName . ", ";
+		$result2 = $query->fetchAll();
+		$tmp .= $result2[0]["levelName"] . ", ";
 	}
+	echo substr($tmp, 0, -2);
 	echo "</td></tr>";
 }
-/*
-	GAUNTLETS
-*/
 ?>
 </table>
 <h1>GAUNTLETS</h1>
@@ -99,4 +108,7 @@ foreach($result as &$gauntlet){
 	GAUNTLETS
 */
 ?>
-</table>
+			</table>
+		</div>
+	</body>
+</html>

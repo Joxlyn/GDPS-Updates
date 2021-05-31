@@ -1,3 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Mod Actions</title>
+		<link rel="stylesheet" href="../style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain nofooter">
 <h1>Actions Count</h1>
 <table border="1">
 <tr><th>Moderator</th><th>Count</th><th>Levels rated</th><th>Last time online</th></tr>
@@ -118,3 +129,6 @@ foreach($result as &$action){
 }
 ?>
 </table>
+		</div>
+	</body>
+</html>
