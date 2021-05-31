@@ -1,4 +1,15 @@
-<h1>VIP List</h1>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Cron Job</title>
+		<link rel="stylesheet" href="style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain nofooter">
+
 <?php
 //error_reporting(0);
 include "../incl/lib/connection.php";
@@ -23,3 +34,7 @@ foreach($result as &$role){
 }
 ?>
 </table>
+
+		</div>
+	</body>
+</html>
