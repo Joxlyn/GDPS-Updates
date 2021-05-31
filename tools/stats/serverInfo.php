@@ -7,7 +7,6 @@
 	
 	<body>
 		
-		
 		<div class="smain nofooter">
 
 			<h1>Levels</h1>
@@ -92,7 +91,7 @@ $query->execute();
 $thing = $query->fetchColumn();
 echo "<tr><td>Everyone</td><td>$thing</td></tr>";
 
-$query = $db->prepare("SELECT count(*) FROM comments WHERE userid IN (SELECT userID FROM users WHERE extID IN (SELECT accountID FROM accounts WHERE isAdmin = 1 OR isHeadAdmin = 1))");
+$query = $db->prepare("SELECT count(*) FROM comments WHERE userid IN (SELECT userID FROM users WHERE extID IN (SELECT accountID FROM accounts WHERE isAdmin = 1))");
 $query->execute();
 $thing = $query->fetchColumn();
 echo "<tr><td>Moderators</td><td>$thing</td></tr>";
