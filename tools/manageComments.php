@@ -17,8 +17,8 @@
 
 <?php
 
-include "../../incl/lib/connection.php";
-require "../../incl/lib/generatePass.php";
+include "../incl/lib/connection.php";
+require "../incl/lib/generatePass.php";
 
 if (!empty($_GET['id']))
 {
