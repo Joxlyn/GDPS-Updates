@@ -2,11 +2,11 @@
 <html>
 	<head>
 		<title>Server Info</title>
-		<?php include "../../../../incl/style.php"; ?>
+		<link rel="stylesheet" href="../style.css"/>
 	</head>
 	
 	<body>
-		<?php include "../../../../incl/navigation.php"; ?>
+		
 		
 		<div class="smain nofooter">
 
