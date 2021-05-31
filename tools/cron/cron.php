@@ -1,3 +1,15 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Cron Job</title>
+		<link rel="stylesheet" href="../style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain nofooter">
+		    
 <?php
 chdir(dirname(__FILE__));
 set_time_limit(0);
@@ -21,3 +33,7 @@ ob_flush();
 flush();
 file_put_contents("../logs/cronlastrun.txt",time());
 ?>
+
+		</div>
+	</body>
+</html>
