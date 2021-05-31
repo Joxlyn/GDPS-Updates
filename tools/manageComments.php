@@ -1,14 +1,24 @@
-<html><head><title>Comment Manager</title></head><body><h1>MANAGE COMMENTS</h1>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Manage Comments</title>
+		<link rel="stylesheet" href="style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain nofooter">
 
-<form action="manageComments.php" method="get">
-LevelID: <input type="text" name="id">
-<input type="submit" value="Go">
-</form>
+			<form action="" method="get">
+				<input class="smain" type="text" placeholder="LevelID" name="id"><br>
+				<input class="smain" type="submit" value="Go">
+			</form>
 
 <?php
 
-include "../incl/lib/connection.php";
-require "../incl/lib/generatePass.php";
+include "../../incl/lib/connection.php";
+require "../../incl/lib/generatePass.php";
 
 if (!empty($_GET['id']))
 {
@@ -16,7 +26,7 @@ if (!empty($_GET['id']))
 	$query->execute([':levelid' => (int)($_GET['id'])]);
 	
 	
-	echo "<form action=\"manageComments.php\" method=\"post\"><table border=\"1\"><tr><th>Hidden</th><th>Username</th><th>UserID</th><th>Comment</th><th>CommentID</th></tr>";
+	echo "<form action=\"\" method=\"post\"><table><tr><th>Hidden</th><th>Username</th><th>UserID</th><th>Comment</th><th>CommentID</th></tr>";
 	
 	$results = $query->fetchAll();
 	
@@ -31,7 +41,7 @@ if (!empty($_GET['id']))
 		echo "<tr><td><center><input type=\"hidden\" name=\"$commentid\" value=\"0\"><input type=\"checkbox\" value=\"1\"$checked name=\"$commentid\"></center></td><td>$username</td><td>$userid</td><td>$comment</td><td>$commentid</td></tr>";
 	}
 	
-	echo "</table><br>Username: <input type=\"text\" name=\"u\"><br>Password: <input type=\"password\" name=\"p\"><br><input type=\"submit\" value=\"Go\"></form>";
+	echo "</table><br><input class=\"smain\" type=\"text\" placeholder=\"Username\" name=\"u\"><br><input class=\"smain\" type=\"password\" placeholder=\"Password\" name=\"p\"><br><input class=\"smain\" type=\"submit\" value=\"Go\"></form>";
 }
 else if (!empty($_POST['u']) and !empty($_POST['p']))
 {	
@@ -43,7 +53,7 @@ else if (!empty($_POST['u']) and !empty($_POST['p']))
 		$query->execute([':userName' => $_POST["u"]]);
 		if($query->rowCount()==0)
 		{
-			echo "<p>Account isn't mod.</p>";
+			echo "<p>Account isn't mod</p>";
 		}
 		else
 		{
@@ -71,14 +81,17 @@ else if (!empty($_POST['u']) and !empty($_POST['p']))
 			//$query2->execute([':ids' => implode(", ", $on)]);
 			//echo var_dump($on).'<br>'.$query2->rowCount().'<br>';
 			
-			echo '<p>Probably worked.</p>';
+			echo '<p>Probably worked</p>';
 		}
 	}
 	else
 	{
-		echo '<p>Invalid credentials.</p>';
+		echo '<p>Invalid credentials</p>';
 	}
 }
 
 
-?></body></html>
+?>
+		</div>
+	</body>
+</html>
