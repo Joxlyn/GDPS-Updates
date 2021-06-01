@@ -21,7 +21,7 @@ Most of the stuff in generateHash.php has been figured out by pavlukivan and Ita
 
 style.css created by Absolute
 
-Thanks to Abosute since most of the tools were made by him (https://github.com/absoIute/1.9-GDPS)
+Thanks to Absolute since most of the tools were made by him (https://github.com/absoIute/1.9-GDPS)
 
 Base: Cvolton https://github.com/Cvolton/GMDprivateServer
 
