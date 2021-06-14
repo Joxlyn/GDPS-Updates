@@ -1,5 +1,13 @@
-<HTML><HEAD><title>Edit Map Packs</title></HEAD><BODY>
-
+<html>
+	<head>
+		<title>Edit Map Packs</title>
+		<link rel="stylesheet" href="style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain">
 <?php
 
 include "../incl/lib/connection.php";
@@ -164,5 +172,6 @@ else
 }
 
 ?>
-
-</BODY></HTML>
+		</div>
+	</body>
+</html>

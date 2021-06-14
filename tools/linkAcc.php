@@ -1,8 +1,13 @@
 <html>
-<head>
-<title>ACCOUNT LINKING</title>
-</head>
-<body>
+	<head>
+		<title>Link Account</title>
+		<link rel="stylesheet" href="style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain">
 <?php
 //error_reporting(-1);
 include "../incl/lib/connection.php";

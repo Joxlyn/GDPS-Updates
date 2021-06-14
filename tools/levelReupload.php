@@ -1,8 +1,13 @@
 <html>
-<head>
-<title>LEVEL REUPLOAD</title>
-</head>
-<body>
+	<head>
+		<title>Level Reupload</title>
+		<link rel="stylesheet" href="style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain">
 <?php
 function chkarray($source){
 	if($source == ""){
@@ -143,6 +148,8 @@ if(!empty($_POST["levelid"])){
 3. Dar click en "Reupload"<br>
 4. Listo, te va a generar una ID que significa que tu nivel ya se encuentra en este GDPS y con esa ID puedes buscar tu nivel.<br>
 
-Extra: Es recomendable vincular tu cuenta en: https://ryoulexx.000webhostapp.com/tools/linkAcc.php ya que asi tu nivel resubido puede quedar a tu nombre automaticamente y ya no aparecera solo el "By"<br>
-</body>
+Extra: Es recomendable vincular tu cuenta en: https://rrebirth.000webhostapp.com/tools/linkAcc.php ya que asi tu nivel resubido puede quedar a tu nombre automaticamente y ya no aparecera solo el "By"<br>
+			</table>
+		</div>
+	</body>
 </html>

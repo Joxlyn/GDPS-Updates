@@ -1,3 +1,13 @@
+<html>
+	<head>
+		<title>Map Pack Create</title>
+		<link rel="stylesheet" href="style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain">
 <?php
 include "../incl/lib/connection.php";
 require "../incl/lib/generatePass.php";
@@ -109,3 +119,6 @@ if(!empty($_POST["userName"]) AND !empty($_POST["password"]) AND !empty($_POST["
 		<input type="submit" value="Create"></form>';
 }
 ?>
+		</div>
+	</body>
+</html>

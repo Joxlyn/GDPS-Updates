@@ -1,8 +1,13 @@
 <html>
-<head>
-<title>LEVEL REUPLOAD TO NORMAL GD</title>
-</head>
-<body>
+	<head>
+		<title>Level to GD</title>
+		<link rel="stylesheet" href="style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain">
 <?php
 function chkarray($source){
 	if($source == ""){
@@ -142,5 +147,7 @@ if(!empty($_POST["userhere"]) AND !empty($_POST["passhere"]) AND !empty($_POST["
 4. Colocar los datos de tu cuenta de GD en donde dice Target Server (Puedes cambiar la URL a otro servidor, haciendo que puedas resubir un nivel de este GDPS a otro GDPS)<br>
 5. Dar click en "Reupload"<br>
 6. Listo, te va a generar una ID que significa que tu nivel ya se encuentra en el GD y con esa ID puedes buscar tu nivel.<br>
-</body>
+			</table>
+		</div>
+	</body>
 </html>

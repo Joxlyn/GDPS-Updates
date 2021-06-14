@@ -21,7 +21,7 @@ foreach($result as &$role){
 	$query = $db->prepare("SELECT accountID FROM roleassign WHERE roleID = :roleID");
 	$query->execute([':roleID' => $role["roleID"]]);
 	$accounts = $query->fetchAll();
-	echo '<table border="1"><tr><th>User</th><th>Last time online</th></tr>';
+	echo '<table border="0"><tr><th>User</th><th>Last time online</th></tr>';
 	foreach($accounts as &$user){
 		$query = $db->prepare("SELECT userName, lastPlayed FROM users WHERE extID = :id");
 		$query->execute([':id' => $user["accountID"]]);
