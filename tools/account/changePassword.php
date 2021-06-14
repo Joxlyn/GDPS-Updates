@@ -1,3 +1,13 @@
+<html>
+	<head>
+		<title>Change Password</title>
+		<link rel="stylesheet" href="../style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain">
 <?php
 include "../../incl/lib/connection.php";
 include_once "../../config/security.php";
@@ -51,3 +61,7 @@ if ($pass == 1) {
 	echo '<form action="changePassword.php" method="post">Username: <input type="text" name="userName"><br>Old password: <input type="password" name="oldpassword"><br>New password: <input type="password" name="newpassword"><br><input type="submit" value="Change"></form>';
 }
 ?>
+			</table>
+		</div>
+	</body>
+</html>

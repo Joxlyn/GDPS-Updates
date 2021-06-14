@@ -1,3 +1,13 @@
+<html>
+	<head>
+		<title>Change Username</title>
+		<link rel="stylesheet" href="../style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain">
 <?php
 include "../../incl/lib/connection.php";
 require "../../incl/lib/generatePass.php";
@@ -25,3 +35,7 @@ if($userName != "" AND $newusr != "" AND $password != ""){
 	echo '<form action="changeUsername.php" method="post">Old username: <input type="text" name="userName"><br>New username: <input type="text" name="newusr"><br>Password: <input type="password" name="password"><br><input type="submit" value="Change"></form>';
 }
 ?>
+			</table>
+		</div>
+	</body>
+</html>

@@ -1,3 +1,13 @@
+<html>
+	<head>
+		<title>Register Account</title>
+		<link rel="stylesheet" href="../style.css"/>
+	</head>
+	
+	<body>
+		
+		
+		<div class="smain">
 <?php
 include "../../incl/lib/connection.php";
 require "../../incl/lib/exploitPatch.php";
@@ -48,3 +58,7 @@ if(!empty($_POST["username"]) AND !empty($_POST["email"]) AND !empty($_POST["rep
 	echo '<body style="background-color:grey;"><form action="registerAccount.php" method="post">Username: <input type="text" name="username" maxlength=15><br>Password: <input type="password" name="password" maxlength=20><br>Repeat Password: <input type="password" name="repeatpassword" maxlength=20><br>Email: <input type="email" name="email" maxlength=50><br>Repeat Email: <input type="email" name="repeatemail" maxlength=50><br><input type="submit" value="Register"></form></body>';
 }
 ?>
+			</table>
+		</div>
+	</body>
+</html>
