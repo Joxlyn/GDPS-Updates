@@ -42,9 +42,9 @@ if (!empty($_GET["id"]))
 		$stars = $user["value"];
 		$time = date("d/m/y H:i:s", $user["timestamp"]);
 		
-		$col = $stars > 750 ? "500000" : "005000";
-		$col = $stars < 0 ? "505000" : $col;
-		
+		$col = $stars > 750 ? "500000" : "1ACE59";
+		$col = $stars < 0 ? "CC0000" : $col;
+		//The second line of $col, in the value of CC0000 should be yellow for some reason, but I changed it to red
 		echo "<tr style=\"background-color: #$col\"><td>$time</td><td>$stars</td></tr>";
 	}
 

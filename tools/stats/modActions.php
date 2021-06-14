@@ -10,7 +10,7 @@
 		
 		<div class="smain nofooter">
 <h1>Actions Count</h1>
-<table border="1">
+<table border="0">
 <tr><th>Moderator</th><th>Count</th><th>Levels rated</th><th>Last time online</th></tr>
 <?php
 //error_reporting(0);
@@ -39,7 +39,7 @@ foreach($result as &$mod){
 ?>
 </table>
 <h1>Actions Log</h1>
-<table border="1"><tr><th>Moderator</th><th>Action</th><th>Value</th><th>Value2</th><th>LevelID</th><th>Time</th></tr>
+<table border="0"><tr><th>Moderator</th><th>Action</th><th>Value</th><th>Value2</th><th>LevelID</th><th>Time</th></tr>
 <?php
 $query = $db->prepare("SELECT * FROM modactions ORDER BY ID DESC");
 $query->execute();

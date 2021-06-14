@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Comments</title>
+		<title>Level Comments</title>
 		<link rel="stylesheet" href="../style.css"/>
 	</head>
 	
