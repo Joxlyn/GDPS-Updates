@@ -48,23 +48,23 @@ if($query->rowCount() == 0){
 	$query->execute([':extID' => $extid]);
 	$accinfo = $query->fetch();
 	$discordID = 0;
-		echo "**Name:** ".$user["userName"].
-		"\r\n**User ID:** ".$user["userID"];
+		echo "**:sparkles:** **Name:** ".$user["userName"].
+		"\r\n**:id: User ID:** ".$user["userID"];
 		if(is_numeric($extid)){
-			echo "\r\n**Account ID:** " . $extid;
+			echo "\r\n**:id: Account ID:** " . $extid;
 			$query = $db->prepare("SELECT discordID FROM accounts WHERE accountID = :extid");
 			$query->execute([':extid' => $extid]);
 			$discordID = $query->fetchColumn();
 		}
 		echo "\r\n**------------------------------------**".
-		"\r\n**Stars:** ".$user["stars"].
-		"\r\n**Coins:** ".$user["coins"].
-		"\r\n**User Coins:** ".$user["userCoins"].
-		"\r\n**Diamonds:** ".$user["diamonds"].
-		"\r\n**Demons: **".$user["demons"].
-		"\r\n**Orbs: **".$user["orbs"].
-		"\r\n**Completed Levels: **".$user["completedLvls"].
-		"\r\n**Creator points:** ".$creatorpoints.
+		"\r\n**<:stargdps:878384596935393310> Stars:** ".$user["stars"].
+		"\r\n**<:coingdps:878383902060863608> Coins:** ".$user["coins"].
+		"\r\n**<:user_coin:878384539259535372> User Coins:** ".$user["userCoins"].
+		"\r\n**:diamond: Diamonds:** ".$user["diamonds"].
+		"\r\n**:hard_demon: Demons: **".$user["demons"].
+		"\r\n**:orbs: Orbs: **".$user["orbs"].
+		"\r\n**:checkon: Completed Levels: **".$user["completedLvls"].
+		"\r\n**:creatorpoint: Creator points:** ".$creatorpoints.
 		"\r\n**------------------------------------**".
 		"\r\n**Leaderboards rank:** ".$rank.
 		"\r\n**Creator leaderboards rank:** ".$crearank.

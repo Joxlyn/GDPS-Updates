@@ -4,7 +4,7 @@ include "../../incl/lib/connection.php";
 $link = $_GET["link"];
 $name = $_GET["name"];
 $author = $_GET["author"];
-//echo "$name:$author:$link";
+echo "$name:$author:$link";
 $ch = curl_init($link);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 curl_setopt($ch, CURLOPT_HEADER, TRUE);
