@@ -8,11 +8,13 @@ $gs = new mainLib();
 $str = $ep->remove($_POST["str"]);
 $difficulty = "";
 $original = "";
+
 //getting level data
 echo "***SHOWING RESULT FOR $str***\r\n";
 include "../../incl/lib/connection.php";
-$query = $db->prepare("SELECT accountID FROM accounts WHERE userName = :str OR userID = :str");
+$query = $db->prepare("SELECT accountID FROM accounts WHERE userName = :str");
 $query->execute([':str' => $str]);
+
 //checking if exists
 if($query->rowCount() == 0){
 	exit("The user you are searching for doesn't exist");
