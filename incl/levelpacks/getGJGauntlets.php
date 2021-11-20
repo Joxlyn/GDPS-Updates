@@ -2,6 +2,7 @@
 chdir(dirname(__FILE__));
 include "../lib/connection.php";
 require_once "../lib/generateHash.php";
+if($maintenanceModeGETGAUNTLETS) exit("-1");
 $generateHash = new generateHash();
 $gauntletstring = "";
 $string = "";
