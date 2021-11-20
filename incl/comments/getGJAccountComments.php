@@ -5,6 +5,7 @@ include "../lib/connection.php";
 require_once "../lib/exploitPatch.php";
 $ep = new exploitPatch();
 require_once "../lib/mainLib.php";
+if($maintenanceModeGETACCCOMMENTS) exit("-1");
 $gs = new mainLib();
 $commentstring = "";
 $accountid = $ep->remove($_POST["accountID"]);
