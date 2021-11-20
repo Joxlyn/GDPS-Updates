@@ -4,6 +4,7 @@ include "../lib/connection.php";
 require "../lib/XORCipher.php";
 require "../lib/generateHash.php";
 require_once "../lib/exploitPatch.php";
+if($maintenanceModeQUESTS) exit("-1");
 $ep = new exploitPatch();
 require_once "../lib/mainLib.php";
 $gs = new mainLib();
