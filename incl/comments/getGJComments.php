@@ -5,6 +5,7 @@ include "../lib/connection.php";
 require_once "../lib/exploitPatch.php";
 $ep = new exploitPatch();
 require_once "../lib/mainLib.php";
+if($maintenanceModeGETCOMMENTS) exit("-1");
 $gs = new mainLib();
 $binaryVersion = $ep->remove($_POST["binaryVersion"]);
 $gameVersion = $ep->remove($_POST["gameVersion"]);
