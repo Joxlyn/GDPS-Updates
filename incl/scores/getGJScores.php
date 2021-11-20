@@ -4,6 +4,7 @@ chdir(dirname(__FILE__));
 include "../lib/connection.php";
 require_once "../lib/exploitPatch.php";
 require_once "../lib/GJPCheck.php";
+if($maintenanceModeTOPSCORE) exit("-1");
 $ep = new exploitPatch();
 $stars = 0;
 $count = 0;
