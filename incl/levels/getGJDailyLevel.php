@@ -8,6 +8,7 @@ if(empty($_POST["weekly"]) OR $_POST["weekly"] == 0){
 	$midnight = strtotime("next monday");
 }
 include "../lib/connection.php";
+if($maintenanceModeGETDAILYLEVELS) exit("-1");
 //Getting DailyID
 $current = time();
 $query=$db->prepare("SELECT feaID FROM dailyfeatures WHERE timestamp < :current AND type = :type ORDER BY timestamp DESC LIMIT 1");
