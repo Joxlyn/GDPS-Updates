@@ -7,6 +7,7 @@ require_once "../lib/exploitPatch.php";
 $ep = new exploitPatch();
 $msgstring = "";
 $userid = 1337;
+if($maintenanceModeGETMESSAGES) exit("-1");
 //code begins
 $toAccountID = $ep->remove($_POST["accountID"]);
 $gjp = $ep->remove($_POST["gjp"]);
