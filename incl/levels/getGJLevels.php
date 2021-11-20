@@ -10,7 +10,7 @@ $gs = new mainLib();
 $GJPCheck = new GJPCheck();
 require "../lib/generateHash.php";
 $hash = new generateHash();
-
+if($maintenanceModeGETLEVELS) exit("-1");
 //initializing variables
 $lvlstring = ""; $userstring = ""; $songsstring = ""; $lvlsmultistring = ""; $str = ""; $order = "uploadDate";
 $orderenabled = true;
