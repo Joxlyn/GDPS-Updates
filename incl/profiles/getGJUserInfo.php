@@ -6,6 +6,7 @@ require_once "../lib/GJPCheck.php";
 $ep = new exploitPatch();
 require_once "../lib/mainLib.php";
 $gs = new mainLib();
+if($maintenanceModeGETUSERINFO) exit("-1");
 $appendix = "";
 $gjp = $ep->remove($_POST["gjp"]);
 $extid = $ep->number($_POST["targetAccountID"]);
