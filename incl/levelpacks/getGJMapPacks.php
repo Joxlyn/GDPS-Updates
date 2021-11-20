@@ -3,6 +3,7 @@ chdir(dirname(__FILE__));
 //error_reporting(0);
 include "../lib/connection.php";
 require_once "../lib/exploitPatch.php";
+if($maintenanceModeGETMAPPACKS) exit("-1");
 $ep = new exploitPatch();
 $page = $ep->remove($_POST["page"]);
 $packpage = $page*10;
