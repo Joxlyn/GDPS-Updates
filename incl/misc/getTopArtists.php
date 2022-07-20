@@ -3,11 +3,10 @@ chdir(dirname(__FILE__));
 require "../lib/connection.php";
 require "../lib/exploitPatch.php";
 require "../../config/topArtists.php";
-$ep = new exploitPatch();
 $str = "";
 
 if(isset($_POST["page"]) AND is_numeric($_POST["page"])){
-	$offset = $ep->number($_POST["page"]) . "0";
+	$offset = ExploitPatch::number($_POST["page"]) . "0";
 	$offset = $offset*2; // ask robtop
 }else{
 	$offset = 0;
@@ -16,13 +15,14 @@ if(isset($_POST["page"]) AND is_numeric($_POST["page"])){
 
 if($redirect == 1) {
 	// send result
-	$url = "http://boomlings.com/database/getGJTopArtists.php";
+	$url = "http://www.boomlings.com/database/getGJTopArtists.php";
 	$request = "page=$offset&secret=Wmfd2893gb7";
 	parse_str($request, $post);
 	// post
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
 	$robsult = curl_exec($ch);
 	curl_close($ch);
 	echo $robsult;

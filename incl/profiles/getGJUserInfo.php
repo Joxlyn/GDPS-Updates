@@ -3,24 +3,14 @@ chdir(dirname(__FILE__));
 include "../lib/connection.php";
 require_once "../lib/exploitPatch.php";
 require_once "../lib/GJPCheck.php";
-$ep = new exploitPatch();
 require_once "../lib/mainLib.php";
 $gs = new mainLib();
 if($maintenanceModeGETUSERINFO) exit("-1");
+
 $appendix = "";
-$gjp = $ep->remove($_POST["gjp"]);
-$extid = $ep->number($_POST["targetAccountID"]);
-if(!empty($_POST["accountID"])){
-	$me = $ep->number($_POST["accountID"]);
-	$GJPCheck = new GJPCheck(); //gjp check
-	$gjpresult = $GJPCheck->check($gjp,$me);
-	if($gjpresult != 1){
-		exit("-1");
-	}
-}else{
-	$me = 0;
-}
-//checking who has blocked him
+$extid = ExploitPatch::number($_POST["targetAccountID"]);
+$me = !empty($_POST["accountID"]) ? GJPCheck::getAccountIDOrDie() : 0;
+//checking who has blocked them
 $query = "SELECT count(*) FROM blocks WHERE (person1 = :extid AND person2 = :me) OR (person2 = :extid AND person1 = :me)";
 $query = $db->prepare($query);
 $query->execute([':extid' => $extid, ':me' => $me]);
@@ -52,6 +42,7 @@ if($query->rowCount() > 0){
 }else{
 	$rank = 0;
 }
+if ($user['isBanned'] != 0) $rank = 0;
 //var_dump($leaderboard);
 	//accinfo
 		$query = "SELECT youtubeurl,twitter,twitch, frS, mS, cS FROM accounts WHERE accountID = :extID";
@@ -96,8 +87,8 @@ if($me==$extid){
 		$query->execute([':extid' => $extid, ':me' => $me]);
 		$INCrequests = $query->rowCount();
 		$INCrequestinfo = $query->fetch();
-		$uploaddate = date("d/m/Y G.i", $INCrequestinfo["uploadDate"]);;
 		if($INCrequests > 0){
+			$uploaddate = date("d/m/Y G.i", $INCrequestinfo["uploadDate"]);
 			$friendstate=3;
 		}
 	//check if OUTCOMING friend request

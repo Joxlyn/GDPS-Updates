@@ -1,117 +1,45 @@
 <?php
+include __DIR__ . "/ip_in_range.php";
 class mainLib {
 	public function getAudioTrack($id) {
-		switch($id){
-			case 0:
-				return "Stereo Madness by ForeverBound";
-				break;
-			case 1:
-				return "Back on Track by DJVI";
-				break;
-			case 2:
-				return "Polargeist by Step";
-				break;
-			case 3:
-				return "Dry Out by DJVI";
-				break;
-			case 4:
-				return "Base after Base by DJVI";
-				break;
-			case 5:
-				return "Can't Let Go by DJVI";
-				break;
-			case 6:
-				return "Jumper by Waterflame";
-				break;
-			case 7:
-				return "Time Machine by Waterflame";
-				break;
-			case 8:
-				return "Cycles by DJVI";
-				break;
-			case 9:
-				return "xStep by DJVI";
-				break;
-			case 10:
-				return "Clutterfunk by Waterflame";
-				break;
-			case 11:
-				return "Theory of Everything by DJ Nate";
-				break;
-			case 12:
-				return "Electroman Adventures by Waterflame";
-				break;
-			case 13:
-				return "Club Step by DJ Nate";
-				break;
-			case 14:
-				return "Electrodynamix by DJ Nate";
-				break;
-			case 15:
-				return "Hexagon Force by Waterflame";
-				break;
-			case 16:
-				return "Blast Processing by Waterflame";
-				break;
-			case 17:
-				return "Theory of Everything 2 by DJ Nate";
-				break;
-			case 18:
-				return "Geometrical Dominator by Waterflame";
-				break;
-			case 19:
-				return "Deadlocked by F-777";
-				break;
-			case 20:
-				return "Fingerbang by MDK";
-				break;
-			case 21:
-				return "The Seven Seas by F-777";
-				break;
-			case 22:
-				return "Viking Arena by F-777";
-				break;
-			case 23:
-				return "Airborne Robots by F-777";
-				break;
-			case 24:
-				return "Secret by RobTopGames";
-				break;
-			case 25:
-				return "Payload by Dex Arson";
-				break;
-			case 26:
-				return "Beast Mode by Dex Arson";
-				break;
-			case 27:
-				return "Machina by Dex Arson";
-				break;
-			case 28:
-				return "Years by Dex Arson";
-				break;
-			case 29:
-				return "Frontlines by Dex Arson";
-				break;
-			case 30:
-				return "Space Pirates by Waterflame";
-				break;
-			case 31:
-				return "Striker by Waterflame";
-				break;
-			case 32:
-				return "Embers by Dex Arson";
-				break;
-			case 33:
-				return "Round 1 by Dex Arson";
-				break;
-			case 34:
-				return "Monster Dance Off by F-777";
-				break;
-			default:
-				return "Unknown by DJVI";
-				break;
-			
-		}
+		$songs = ["Stereo Madness by ForeverBound",
+			"Back on Track by DJVI",
+			"Polargeist by Step",
+			"Dry Out by DJVI",
+			"Base after Base by DJVI",
+			"Can't Let Go by DJVI",
+			"Jumper by Waterflame",
+			"Time Machine by Waterflame",
+			"Cycles by DJVI",
+			"xStep by DJVI",
+			"Clutterfunk by Waterflame",
+			"Theory of Everything by DJ Nate",
+			"Electroman Adventures by Waterflame",
+			"Club Step by DJ Nate",
+			"Electrodynamix by DJ Nate",
+			"Hexagon Force by Waterflame",
+			"Blast Processing by Waterflame",
+			"Theory of Everything 2 by DJ Nate",
+			"Geometrical Dominator by Waterflame",
+			"Deadlocked by F-777",
+			"Fingerbang by MDK",
+			"The Seven Seas by F-777",
+			"Viking Arena by F-777",
+			"Airborne Robots by F-777",
+			"Secret by RobTopGames",
+			"Payload by Dex Arson",
+			"Beast Mode by Dex Arson",
+			"Machina by Dex Arson",
+			"Years by Dex Arson",
+			"Frontlines by Dex Arson",
+			"Space Pirates by Waterflame",
+			"Striker by Waterflame",
+			"Embers by Dex Arson",
+			"Round 1 by Dex Arson",
+			"Monster Dance Off by F-777"];
+		if($id < 0 || $id >= count($songs))
+			return "Unknown by DJVI";
+		return $songs[$id];
 	}
 	public function getDifficulty($diff,$auto,$demon) {
 		if($auto != 0){
@@ -214,6 +142,10 @@ class mainLib {
 	public function getGameVersion($version) {
 		if($version > 17){
 			return $version / 10;
+		}elseif($version == 11){
+			return "1.8";
+		}elseif($version == 10){
+			return "1.7";
 		}else{
 			$version--;
 			return "1.$version";
@@ -227,16 +159,14 @@ class mainLib {
 			case 4:
 				return "Medium";
 				break;
-			case 0:
-			case 1:
-			case 2:
-				return "Hard";
-				break;
 			case 5:
 				return "Insane";
 				break;
 			case 6:
 				return "Extreme";
+				break;
+			default:
+				return "Hard";
 				break;
 		}
 	}
@@ -245,7 +175,7 @@ class mainLib {
 		$starAuto = 0;
 		$starDemon = 0;
 		switch ($name) {
-			case "na":
+			default:
 				$starDifficulty = 0;
 				break;
 			case "easy":
@@ -275,57 +205,10 @@ class mainLib {
 		return array($starDifficulty, $starDemon, $starAuto);
 	}
 	public function getGauntletName($id){
-		switch($id){
-		case 1:
-			$gauntletname = "Fire";
-			break;
-		case 2:
-			$gauntletname = "Ice";
-			break;
-		case 3:
-			$gauntletname = "Poison";
-			break;
-		case 4:
-			$gauntletname = "Shadow";
-			break;
-		case 5:
-			$gauntletname = "Lava";
-			break;
-		case 6:
-			$gauntletname = "Bonus";
-			break;
-		case 7:
-			$gauntletname = "Chaos";
-			break;
-		case 8:
-			$gauntletname = "Demon";
-			break;
-		case 9:
-			$gauntletname = "Time";
-			break;
-		case 10:
-			$gauntletname = "Crystal";
-			break;
-		case 11:
-			$gauntletname = "Magic";
-			break;
-		case 12:
-			$gauntletname = "Spike";
-			break;
-		case 13:
-			$gauntletname = "Monster";
-			break;
-		case 14:
-			$gauntletname = "Doom";
-			break;
-		case 15:
-			$gauntletname = "Death";
-			break;
-		default:
-			$gauntletname = "Unknown";
-			break;
-		}
-		return $gauntletname;
+		$gauntlets = ["Unknown", "Fire", "Ice", "Poison", "Shadow", "Lava", "Bonus", "Chaos", "Demon", "Time", "Crystal", "Magic", "Spike", "Monster", "Doom", "Death"];
+		if($id < 0 || $id >= count($gauntlets))
+			return $gauntlets[0];
+		return $gauntlets[$id];
 	}
 
 	function makeTime($delta)
@@ -380,7 +263,26 @@ class mainLib {
 			return $rounded." year".($rounded == 1 ? "" : "s");
 		}
 	}
+	public function getIDFromPost(){
+		include __DIR__ . "/../../config/security.php";
+		include_once __DIR__ . "/exploitPatch.php";
+		include_once __DIR__ . "/GJPCheck.php";
 
+		if(!empty($_POST["udid"]) AND $_POST['gameVersion'] < 20 AND $unregisteredSubmissions) 
+		{
+			$id = ExploitPatch::remove($_POST["udid"]);
+			if(is_numeric($id)) exit("-1");
+		}
+		elseif(!empty($_POST["accountID"]) AND $_POST["accountID"]!="0")
+		{
+			$id = GJPCheck::getAccountIDOrDie();
+		}
+		else
+		{
+			exit("-1");
+		}
+		return $id;
+	}
 	public function getUserID($extID, $userName = "Undefined") {
 		include __DIR__ . "/connection.php";
 		if(is_numeric($extID)){
@@ -444,38 +346,34 @@ class mainLib {
 			return 0;
 		}
 	}
-	public function getUserString($userID) {
+	public function getUserString($userdata) {
 		include __DIR__ . "/connection.php";
-		$query = $db->prepare("SELECT userName, extID FROM users WHERE userID = :id");
+		/*$query = $db->prepare("SELECT userName, extID FROM users WHERE userID = :id");
 		$query->execute([':id' => $userID]);
-		$userdata = $query->fetch();
-		if(is_numeric($userdata["extID"])){
-			$extID = $userdata["extID"];
-		}else{
-			$extID = 0;
-		}
-		return $userID . ":" . $userdata["userName"] . ":" . $extID;
+		$userdata = $query->fetch();*/
+		$extID = is_numeric($userdata['extID']) ? $userdata['extID'] : 0;
+		return "${userdata['userID']}:${userdata['userName']}:${extID}";
 	}
-	public function getSongString($songID){
+	public function getSongString($song){
 		include __DIR__ . "/connection.php";
-		$query3=$db->prepare("SELECT ID,name,authorID,authorName,size,isDisabled,download FROM songs WHERE ID = :songid LIMIT 1");
-		$query3->execute([':songid' => $songID]);
-		if($query3->rowCount() == 0){
+		/*$query3=$db->prepare("SELECT ID,name,authorID,authorName,size,isDisabled,download FROM songs WHERE ID = :songid LIMIT 1");
+		$query3->execute([':songid' => $songID]);*/
+		if($song['ID'] == 0 || empty($song['ID'])){
 			return false;
 		}
-		$result4 = $query3->fetch();
-		if($result4["isDisabled"] == 1){
+		//$song = $query3->fetch();
+		if($song["isDisabled"] == 1){
 			return false;
 		}
-		$dl = $result4["download"];
+		$dl = $song["download"];
 		if(strpos($dl, ':') !== false){
 			$dl = urlencode($dl);
 		}
-		return "1~|~".$result4["ID"]."~|~2~|~".str_replace("#", "", $result4["name"])."~|~3~|~".$result4["authorID"]."~|~4~|~".$result4["authorName"]."~|~5~|~".$result4["size"]."~|~6~|~~|~10~|~".$dl."~|~7~|~~|~8~|~1";
+		return "1~|~".$song["ID"]."~|~2~|~".str_replace("#", "", $song["name"])."~|~3~|~".$song["authorID"]."~|~4~|~".$song["authorName"]."~|~5~|~".$song["size"]."~|~6~|~~|~10~|~".$dl."~|~7~|~~|~8~|~1";
 	}
 	public function sendDiscordPM($receiver, $message){
 		include __DIR__ . "/../../config/discord.php";
-		if($discordEnabled != 1){
+		if(!$discordEnabled){
 			return false;
 		}
 		//findind the channel id
@@ -485,13 +383,14 @@ class mainLib {
 		//echo $url;
 		$crl = curl_init($url);
 		$headr = array();
-		$headr['User-Agent'] = 'CvoltonGDPS (http://pi.michaelbrabec.cz:9010, 1.0)';
+		$headr['User-Agent'] = 'GMDprivateServer (https://github.com/Cvolton/GMDprivateServer, 1.0)';
 		curl_setopt($crl, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
 		curl_setopt($crl, CURLOPT_POSTFIELDS, $data_string);
 		$headr[] = 'Content-type: application/json';
 		$headr[] = 'Authorization: Bot '.$bottoken;
 		curl_setopt($crl, CURLOPT_HTTPHEADER,$headr);
-		curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($crl, CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
 		$response = curl_exec($crl);
 		curl_close($crl);
 		$responseDecode = json_decode($response, true);
@@ -503,13 +402,14 @@ class mainLib {
 		//echo $url;
 		$crl = curl_init($url);
 		$headr = array();
-		$headr['User-Agent'] = 'CvoltonGDPS (http://pi.michaelbrabec.cz:9010, 1.0)';
+		$headr['User-Agent'] = 'GMDprivateServer (https://github.com/Cvolton/GMDprivateServer, 1.0)';
 		curl_setopt($crl, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
 		curl_setopt($crl, CURLOPT_POSTFIELDS, $data_string);
 		$headr[] = 'Content-type: application/json';
 		$headr[] = 'Authorization: Bot '.$bottoken;
 		curl_setopt($crl, CURLOPT_HTTPHEADER,$headr);
-		curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($crl, CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
 		$response = curl_exec($crl);
 		curl_close($crl);
 		return $response;
@@ -520,11 +420,12 @@ class mainLib {
 		$url = "https://discord.com/api/v8/users/".$discordID;
 		$crl = curl_init($url);
 		$headr = array();
-		$headr['User-Agent'] = 'CvoltonGDPS (http://pi.michaelbrabec.cz:9010, 1.0)';
+		$headr['User-Agent'] = 'GMDprivateServer (https://github.com/Cvolton/GMDprivateServer, 1.0)';
 		$headr[] = 'Content-type: application/json';
 		$headr[] = 'Authorization: Bot '.$bottoken;
 		curl_setopt($crl, CURLOPT_HTTPHEADER,$headr);
-		curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($crl, CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
 		$response = curl_exec($crl);
 		curl_close($crl);
 		$userinfo = json_decode($response, true);
@@ -616,21 +517,23 @@ class mainLib {
 			'197.234.240.0/22',
 			'198.41.128.0/17',
 			'162.158.0.0/15',
-			'104.16.0.0/12',
+			'104.16.0.0/13',
+			'104.24.0.0/14',
 			'172.64.0.0/13',
 			'131.0.72.0/22'
 	    );
 	    foreach ($cf_ips as $cf_ip) {
-	        if (ip_in_range($ip, $cf_ip)) {
+	        if (ipInRange::ipv4_in_range($ip, $cf_ip)) {
 	            return true;
 	        }
 	    }
 	    return false;
 	}
 	public function getIP(){
-		if (isset($_SERVER["HTTP_CF_CONNECTING_IP"]) && $this->isCloudFlareIP($_SERVER['REMOTE_ADDR'])) {
-  			return $_SERVER["HTTP_CF_CONNECTING_IP"];
-		}
+		if (isset($_SERVER['HTTP_CF_CONNECTING_IP']) && $this->isCloudFlareIP($_SERVER['REMOTE_ADDR'])) //CLOUDFLARE REVERSE PROXY SUPPORT
+  			return $_SERVER['HTTP_CF_CONNECTING_IP'];
+		if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && ipInRange::ipv4_in_range($_SERVER['REMOTE_ADDR'], '127.0.0.0/8')) //LOCALHOST REVERSE PROXY SUPPORT (7m.pl)
+			return $_SERVER['HTTP_X_FORWARDED_FOR'];
 		return $_SERVER['REMOTE_ADDR'];
 	}
 	public function checkModIPPermission($permission){
@@ -673,6 +576,12 @@ class mainLib {
 			}
 		}
 		return $friendsarray;
+	}
+	public function isFriends($accountID, $targetAccountID) {
+		include __DIR__ . "/connection.php";
+		$query = $db->prepare("SELECT count(*) FROM friendships WHERE person1 = :accountID AND person2 = :targetAccountID OR person1 = :targetAccountID AND person2 = :accountID");
+		$query->execute([':accountID' => $accountID, ':targetAccountID' => $targetAccountID]);
+		return $query->fetchColumn() > 0;
 	}
 	public function getMaxValuePermission($accountID, $permission){
 		include __DIR__ . "/connection.php";
@@ -719,8 +628,9 @@ class mainLib {
 		}
 		$query = $db->prepare("SELECT commentColor FROM roles WHERE isDefault = 1");
 		$query->execute();
-		$role = $query->fetch();
-		return $role["commentColor"];
+		if($query->rowCount() > 0)
+			return $query->fetchColumn();
+		return "255,255,255";
 	}
 	public function rateLevel($accountID, $levelID, $stars, $difficulty, $auto, $demon){
 		include __DIR__ . "/connection.php";
@@ -753,61 +663,47 @@ class mainLib {
 	}
 	public function songReupload($url){
 		require __DIR__ . "/../../incl/lib/connection.php";
-		require __DIR__ . "/../../incl/lib/exploitPatch.php";
-		include __DIR__ . "/../../config/songAdd.php";
-		$ep = new exploitPatch();
+		require_once __DIR__ . "/../../incl/lib/exploitPatch.php";
 		$song = str_replace("www.dropbox.com","dl.dropboxusercontent.com",$url);
-		if (filter_var($song, FILTER_VALIDATE_URL) == TRUE) {
-			if(strpos($song, 'soundcloud.com') !== false){
-				$songinfo = file_get_contents("https://api.soundcloud.com/resolve.json?url=".$song."&client_id=".$api_key);
-				$array = json_decode($songinfo);
-				if($array->downloadable == true){
-					$song = trim($array->download_url . "?client_id=".$api_key);
-					$name = $ep->remove($array->title);
-					$author = $array->user->username;
-					$author = preg_replace("/[^A-Za-z0-9 ]/", '', $author);
-				}else{
-					if(!$array->id){
-						return "-4";
-					}
-					$song = trim("https://api.soundcloud.com/tracks/".$array->id."/stream?client_id=".$api_key);
-					$name = $ep->remove($array->title);
-					$author = $array->user->username;
-					$author = preg_replace("/[^A-Za-z0-9 ]/", '', $author);
-				}
-			}else{
-				$song = str_replace(["?dl=0","?dl=1"],"",$song);
-				$song = trim($song);
-				$name = $ep->remove(urldecode(str_replace([".mp3",".webm",".mp4",".wav"], "", basename($song))));
-				$author = "Reupload";
-			}
-			$size = $this->getFileSize($song);
-			$size = round($size / 1024 / 1024, 2);
-			$hash = "";
+		if (filter_var($song, FILTER_VALIDATE_URL) == TRUE && substr($song, 0, 4) == "http") {
+			$song = str_replace(["?dl=0","?dl=1"],"",$song);
+			$song = trim($song);
 			$query = $db->prepare("SELECT count(*) FROM songs WHERE download = :download");
 			$query->execute([':download' => $song]);	
 			$count = $query->fetchColumn();
 			if($count != 0){
 				return "-3";
-			}else{
-				$query = $db->prepare("INSERT INTO songs (name, authorID, authorName, size, download, hash)
-				VALUES (:name, '9', :author, :size, :download, :hash)");
-				$query->execute([':name' => $name, ':download' => $song, ':author' => $author, ':size' => $size, ':hash' => $hash]);
-				return $db->lastInsertId();
 			}
+			$name = ExploitPatch::remove(urldecode(str_replace([".mp3",".webm",".mp4",".wav"], "", basename($song))));
+			$author = "Reupload";
+			$info = $this->getFileInfo($song);
+			$size = $info['size'];
+			if(substr($info['type'], 0, 6) != "audio/")
+				return "-4";
+			$size = round($size / 1024 / 1024, 2);
+			$hash = "";
+			$query = $db->prepare("INSERT INTO songs (name, authorID, authorName, size, download, hash)
+			VALUES (:name, '9', :author, :size, :download, :hash)");
+			$query->execute([':name' => $name, ':download' => $song, ':author' => $author, ':size' => $size, ':hash' => $hash]);
+			return $db->lastInsertId();
 		}else{
 			return "-2";
 		}
 	}
-	public function getFileSize($url){
+	public function getFileInfo($url){
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_HEADER, TRUE);
-		curl_setopt($ch, CURLOPT_NOBODY, TRUE);
+		//curl_setopt($ch, CURLOPT_NOBODY, TRUE);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2);
+		curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
 		$data = curl_exec($ch);
 		$size = curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+		$mime = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+		//$status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
 		curl_close($ch);
-		return $size;
+		return ['size' => $size, 'type' => $mime];
 	}
 	public function suggestLevel($accountID, $levelID, $difficulty, $stars, $feat, $auto, $demon){
 		include __DIR__ . "/connection.php";
