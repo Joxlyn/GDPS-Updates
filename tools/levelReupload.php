@@ -3,15 +3,15 @@
 		<title>Level Reupload</title>
 		<link rel="stylesheet" href="style.css"/>
 	</head>
-	
+
 	<body>
-		
-		
+
+
 		<div class="smain">
 <?php
-function chkarray($source){
+function chkarray($source, $default = 0){
 	if($source == ""){
-		$target = "0";
+		$target = $default;
 	}else{
 		$target = $source;
 	}
@@ -20,7 +20,9 @@ function chkarray($source){
 //error_reporting(0);
 include "../incl/lib/connection.php";
 require "../incl/lib/XORCipher.php";
-$xc = new XORCipher();
+require "../config/reuploadAcc.php";
+require_once "../incl/lib/mainLib.php";
+$gs = new mainLib();
 if(!empty($_POST["levelid"])){
 	$levelID = $_POST["levelid"];
 	$levelID = preg_replace("/[^0-9]/", '', $levelID);
@@ -29,6 +31,7 @@ if(!empty($_POST["levelid"])){
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
 	$result = curl_exec($ch);
 	curl_close($ch);
 	if($result == "" OR $result == "-1" OR $result == "No no no"){
@@ -81,22 +84,19 @@ if(!empty($_POST["levelid"])){
 			if($parsedurl["host"] == $_SERVER['SERVER_NAME']){
 				exit("You're attempting to reupload from the target server.");
 			}
-			if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-				$hostname = $_SERVER['HTTP_CLIENT_IP'];
-			} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-				$hostname = $_SERVER['HTTP_X_FORWARDED_FOR'];
-			} else {
-				$hostname = $_SERVER['REMOTE_ADDR'];
-			}
+			$hostname = $gs->getIP();
 			//values
 			$twoPlayer = chkarray($levelarray["a31"]);
 			$songID = chkarray($levelarray["a35"]);
 			$coins = chkarray($levelarray["a37"]);
 			$reqstar = chkarray($levelarray["a39"]);
-			$extraString = chkarray($levelarray["a36"]);
+			$extraString = chkarray($levelarray["a36"], "");
 			$starStars = chkarray($levelarray["a18"]);
 			$isLDM = chkarray($levelarray["a40"]);
-			$password = chkarray($xc->cipher(base64_decode($levelarray["a27"]),26364));
+			$password = chkarray($levelarray["a27"]);
+			if($password != "0"){
+				$password = XORCipher::cipher(base64_decode($password),26364);
+			}
 			$starCoins = 0;
 			$starDiff = 0;
 			$starDemon = 0;
@@ -113,11 +113,11 @@ if(!empty($_POST["levelid"])){
 			}
 			$targetUserID = chkarray($levelarray["a6"]);
 			//linkacc
-			$query = $db->prepare("SELECT accountID, userID FROM links WHERE targetUserID=:target");
-			$query->execute([':target' => $targetUserID]);
+			$query = $db->prepare("SELECT accountID, userID FROM links WHERE targetUserID=:target AND server=:url");
+			$query->execute([':target' => $targetUserID, ':url' => $parsedurl["host"]]);
 			if($query->rowCount() == 0){
-				$userID = 388;
-				$extID = 263;
+				$userID = $reupUID;
+				$extID = $reupAID;
 			}else{
 				$userInfo = $query->fetchAll()[0];
 				$userID = $userInfo["userID"];
@@ -125,7 +125,7 @@ if(!empty($_POST["levelid"])){
 			}
 			//query
 			$query = $db->prepare("INSERT INTO levels (levelName, gameVersion, binaryVersion, userName, levelDesc, levelVersion, levelLength, audioTrack, auto, password, original, twoPlayer, songID, objects, coins, requestedStars, extraString, levelString, levelInfo, secret, uploadDate, updateDate, originalReup, userID, extID, unlisted, hostname, starStars, starCoins, starDifficulty, starDemon, starAuto, isLDM)
-												VALUES (:name ,:gameVersion, '27', 'Reupload', :desc, :version, :length, :audiotrack, '0', :password, :originalReup, :twoPlayer, :songID, '0', :coins, :reqstar, :extraString, :levelString, '0', '0', '$uploadDate', '$uploadDate', :originalReup, :userID, :extID, '0', :hostname, :starStars, :starCoins, :starDifficulty, :starDemon, :starAuto, :isLDM)");
+												VALUES (:name ,:gameVersion, '27', 'Reupload', :desc, :version, :length, :audiotrack, '0', :password, :originalReup, :twoPlayer, :songID, '0', :coins, :reqstar, :extraString, :levelString, '', '', '$uploadDate', '$uploadDate', :originalReup, :userID, :extID, '0', :hostname, :starStars, :starCoins, :starDifficulty, :starDemon, :starAuto, :isLDM)");
 			$query->execute([':password' => $password, ':starDemon' => $starDemon, ':starAuto' => $starAuto, ':gameVersion' => $gameVersion, ':name' => $levelarray["a2"], ':desc' => $levelarray["a3"], ':version' => $levelarray["a5"], ':length' => $levelarray["a15"], ':audiotrack' => $levelarray["a12"], ':twoPlayer' => $twoPlayer, ':songID' => $songID, ':coins' => $coins, ':reqstar' => $reqstar, ':extraString' => $extraString, ':levelString' => "", ':originalReup' => $levelarray["a1"], ':hostname' => $hostname, ':starStars' => $starStars, ':starCoins' => $starCoins, ':starDifficulty' => $starDiff, ':userID' => $userID, ':extID' => $extID, ':isLDM' => $isLDM]);
 			$levelID = $db->lastInsertId();
 			file_put_contents("../data/levels/$levelID",$levelString);
@@ -135,11 +135,14 @@ if(!empty($_POST["levelid"])){
 		}
 	}
 }else{
-	echo '<h4><a href="linkAcc.php">LINKING YOUR ACCOUNT USING linkAcc.php RECOMMENDED</a></h4><form action="levelReupload.php" method="post">ID: <input type="text" name="levelid"><br>URL (dont change if you dont know what youre doing): <input type="text" name="server" value="http://www.boomlings.com/database/downloadGJLevel22.php"><br>Debug Mode (0=off, 1=on): <input type="text" name="debug" value="0"><br><input type="submit" value="Reupload"></form><br>Alternative servers to reupload from:<br>
-	http://www.boomlings.com/database/downloadGJLevel22.php - Robtops server<br>
-	http://joxlyn.7m.pl/gdps/database/downloadGJLevel22.php - Joxlyn GDPS<br>
-	http://pi.michaelbrabec.cz:9010/a/downloadGJLevel22.php - CvoltonGDPS<br>
-	http://teamhax.altervista.org/dbh/downloadGJLevel22.php - TeamHax GDPS';
+	echo '<h4><a href="linkAcc.php">LINKING YOUR ACCOUNT USING linkAcc.php RECOMMENDED</a></h4>
+		<form action="levelReupload.php" method="post">ID: <input type="text" name="levelid"><br>
+		<details>
+		    <summary>Advanced options</summary>
+		    URL: <input type="text" name="server" value="http://www.boomlings.com/database/downloadGJLevel22.php"><br>
+			Debug Mode (0=off, 1=on): <input type="text" name="debug" value="0"><br>
+		</details>
+		<input type="submit" value="Reupload"></form>';
 }
 ?>
 <h3>Mini-guia de como resubir un nivel de GD a este GDPS:</h3><br>

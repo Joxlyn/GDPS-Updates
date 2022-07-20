@@ -3,27 +3,25 @@
 		<title>Add Quests</title>
 		<link rel="stylesheet" href="style.css"/>
 	</head>
-	
+
 	<body>
-		
-		
+
+
 		<div class="smain">
 <?php
 include "../incl/lib/connection.php";
 require "../incl/lib/generatePass.php";
 require "../incl/lib/exploitPatch.php";
-require "../incl/lib/mainLib.php";
+require_once "../incl/lib/mainLib.php";
 $gs = new mainLib();
-$ep = new exploitPatch();
 if(!empty($_POST["userName"]) AND !empty($_POST["password"]) AND !empty($_POST["type"]) AND !empty($_POST["amount"]) AND !empty($_POST["reward"]) AND !empty($_POST["names"])){
-	$userName = $ep->remove($_POST["userName"]);
-	$password = $ep->remove($_POST["password"]);
-	$type = $ep->number($_POST["type"]);
-	$amount = $ep->number($_POST["amount"]);
-    $reward = $ep->number($_POST["reward"]);
-    $name = $ep->remove($_POST["names"]);
-	$generatePass = new generatePass();
-	$pass = $generatePass->isValidUsrname($userName, $password);
+	$userName = ExploitPatch::remove($_POST["userName"]);
+	$password = ExploitPatch::remove($_POST["password"]);
+	$type = ExploitPatch::number($_POST["type"]);
+	$amount = ExploitPatch::number($_POST["amount"]);
+    $reward = ExploitPatch::number($_POST["reward"]);
+    $name = ExploitPatch::remove($_POST["names"]);
+	$pass = GeneratePass::isValidUsrname($userName, $password);
 	if ($pass == 1) {
 		$query = $db->prepare("SELECT accountID FROM accounts WHERE userName=:userName");	
 		$query->execute([':userName' => $userName]);
@@ -49,8 +47,7 @@ if(!empty($_POST["userName"]) AND !empty($_POST["password"]) AND !empty($_POST["
         echo "Invalid password or nonexistant account. <a href='addQuest.php'>Try again</a>";
     }
 }else{
-	echo '<script src="incl/jscolor/jscolor.js"></script>
-		<form action="addQuests.php" method="post">Username: <input type="text" name="userName">
+	echo '<form action="addQuests.php" method="post">Username: <input type="text" name="userName">
 		<br>Password: <input type="password" name="password">
 		<br>Quest Type: <select name="type">
 			<option value="1">Orbs</option>

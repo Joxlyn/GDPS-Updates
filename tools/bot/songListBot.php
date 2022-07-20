@@ -7,9 +7,9 @@ if($_GET["page"] > 0){
 }
 $humanpage = $page +1;
 $page = $page*20;
-echo "***SHOWING PAGE $humanpage***\r\n";
+echo "***MOSTRANDO PAGINA: $humanpage***\r\n";
 include "../../incl/lib/connection.php";
-$query = $db->prepare("SELECT ID,name FROM songs WHERE ID >= 0 ORDER BY ID ASC LIMIT $page , 20");
+$query = $db->prepare("SELECT ID,name FROM songs WHERE ID >= 5000000 ORDER BY ID DESC LIMIT $page , 20");
 $query->execute();
 $result = $query->fetchAll();
 foreach($result as &$song){
@@ -18,4 +18,4 @@ foreach($result as &$song){
 	echo "**".$song["ID"]." : **".$name."\r\n";
 }
 ?>
-***USE !songlist <page> TO SEE MORE SONGS***
+***USA !songlist <page> PARA VER MAS CANCIONES***

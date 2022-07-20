@@ -2,20 +2,19 @@
 //error_reporting(0);
 include_once "../../incl/lib/connection.php";
 require_once "../../incl/lib/exploitPatch.php";
-$ep = new exploitPatch();
 require_once "../../incl/lib/mainLib.php";
 $gs = new mainLib();
-$str = $ep->remove($_GET["str"]);
+$str = ExploitPatch::remove($_GET["str"]);
 $difficulty = "";
 $original = "";
 //getting level data
-echo "***SHOWING RESULT FOR $str***\r\n";
+echo "***MOSTRANDO RESULTADOS DE: $str***\r\n";
 include "../../incl/lib/connection.php";
 $query = $db->prepare("(SELECT * FROM levels WHERE levelID = :str) UNION (SELECT * FROM levels WHERE levelName LIKE CONCAT('%', :str, '%') ORDER BY likes DESC LIMIT 1)"); //getting level info
 $query->execute([':str' => $str]);
 //checking if exists
 if($query->rowCount() == 0){
-	exit("The level you are searching for doesn't exist");
+	exit("El nivel que estas buscando no existe.");
 }
 $levelInfo = $query->fetchAll()[0];
 //getting creator name
@@ -85,18 +84,18 @@ if($levelInfo["starCoins"] != 0){
 //gameVersion
 $gameVersion = $gs->getGameVersion($levelInfo["gameVersion"]);
 //outputting everything
-echo "**NAME:** ".$levelInfo["levelName"]."
-**ID:** ".$levelInfo["levelID"]."
+echo "**:sparkles: LEVEL NAME:** ".$levelInfo["levelName"]."
+**:id: ID:** ".$levelInfo["levelID"]."
 **Author:** ".$creator."
 **Song:** ".$song."
 **Difficulty:** ".$difficulty."
-**Coins:** ".$coins."
+**<:user_coin:878384539259535372> Coins:** ".$coins."
 **Length:** ".$length."
 **Upload Time:** ".$uploadDate."
 **Update Time:** ".$updateDate." $original $whorated
 **Objects:** ".$levelInfo["objects"]."
 **Level Version:** ".$levelInfo["levelVersion"]."
 **Game Version:** ".$gameVersion."
-**Downloads:** ".$levelInfo["downloads"]."
-**Likes:** ".$levelInfo["likes"];
+**<:download:878385709306761257> Downloads:** ".$levelInfo["downloads"]."
+**<:like:878385270045675603> Likes:** ".$levelInfo["likes"];
 ?>

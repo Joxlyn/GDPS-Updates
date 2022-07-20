@@ -5,15 +5,15 @@ $query = $db->prepare("SELECT account FROM modactions WHERE value3 = :lvid AND t
 $query->execute([':lvid' => $_GET["level"]]);
 $result = $query->fetchAll();
 if(!is_numeric($_GET["level"])){
-	exit("Please supply a valid level ID.");
+	exit("Por favor, ingrese una ID valida!");
 }
 if($query->rowCount() == 0){
-	echo "Nobody did!";
+	echo "Nadie ha rateado el nivel!";
 }
 foreach($result as &$action){
 	$query = $db->prepare("SELECT userName FROM accounts WHERE accountID = :id");
 	$query->execute([':id' => $action["account"]]);
 	$userName = $query->fetchColumn();
-	echo $userName." did!\r\n";
+	echo $userName." rateo el nivel!\r\n";
 }
 ?>

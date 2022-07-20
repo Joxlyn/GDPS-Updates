@@ -5,7 +5,7 @@ require_once "../../incl/lib/mainLib.php";
 $gs = new mainLib();
 $difficulty = "";
 //getting level data
-echo "***CURRENT DAILY LEVEL***\r\n";
+echo "***NIVEL DIARIO ACTUAL***\r\n";
 include "../../incl/lib/connection.php";
 $query = $db->prepare("SELECT timestamp,levelID FROM dailyfeatures WHERE timestamp < :time ORDER BY timestamp DESC LIMIT 1"); //getting level info
 $query->execute([':time' => time()]);
@@ -14,7 +14,7 @@ $query = $db->prepare("SELECT * FROM levels WHERE levelID = :str LIMIT 1"); //ge
 $query->execute([':str' => $dailyinfo["levelID"]]);
 //checking if exists
 if($query->rowCount() == 0){
-	exit("The level you are searching for doesn't exist");
+	exit("El nivel que esta buscando no existe!");
 }
 $levelInfo = $query->fetchAll()[0];
 //getting creator name
@@ -85,11 +85,11 @@ if($levelInfo["starCoins"] != 0){
 $gameVersion = $gs->getGameVersion($levelInfo["gameVersion"]);
 $dailytime = date("d-m-Y G-i", $dailyinfo["timestamp"]);
 //outputting everything
-echo "**NAME:** ".$levelInfo["levelName"]."
+echo "**LEVEL NAME:** ".$levelInfo["levelName"]."
 **ID:** ".$levelInfo["levelID"]."
 **Author:** ".$creator."
 **Song:** ".$song."
 **Difficulty:** ".$difficulty."
 **Daily Since:** ".$dailytime."
-***DO ***`!level ".$levelInfo["levelID"]."`*** FOR MORE INFO***";
+***EJECUTA ***`!level ".$levelInfo["levelID"]."`*** PARA MAS INFORMACION ACERCA DEL NIVEL!***";
 ?>

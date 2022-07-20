@@ -3,24 +3,22 @@
 		<title>Link Account</title>
 		<link rel="stylesheet" href="style.css"/>
 	</head>
-	
+
 	<body>
-		
-		
+
+
 		<div class="smain">
 <?php
 //error_reporting(-1);
 include "../incl/lib/connection.php";
 require_once "../incl/lib/generatePass.php";
-$generatePass = new generatePass();
 require_once "../incl/lib/exploitPatch.php";
-$ep = new exploitPatch();
 if(!empty($_POST["userhere"]) AND !empty($_POST["passhere"]) AND !empty($_POST["usertarg"]) AND !empty($_POST["passtarg"])){
-	$userhere = $ep->remove($_POST["userhere"]);
-	$passhere = $ep->remove($_POST["passhere"]);
-	$usertarg = $ep->remove($_POST["usertarg"]);
-	$passtarg = $ep->remove($_POST["passtarg"]);
-	$pass = $generatePass->isValidUsrname($userhere, $passhere);
+	$userhere = ExploitPatch::remove($_POST["userhere"]);
+	$passhere = ExploitPatch::remove($_POST["passhere"]);
+	$usertarg = ExploitPatch::remove($_POST["usertarg"]);
+	$passtarg = ExploitPatch::remove($_POST["passtarg"]);
+	$pass = GeneratePass::isValidUsrname($userhere, $passhere);
 	//echo $pass;
 	if ($pass == 1) {
 		$url = $_POST["server"];
@@ -31,6 +29,7 @@ if(!empty($_POST["userhere"]) AND !empty($_POST["passhere"]) AND !empty($_POST["
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+		curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
 		$result = curl_exec($ch);
 		curl_close($ch);
 		if($result == "" OR $result == "-1" OR $result == "No no no"){
@@ -79,14 +78,22 @@ if(!empty($_POST["userhere"]) AND !empty($_POST["passhere"]) AND !empty($_POST["
 		echo "Invalid local username/password combination.";
 	}
 }else{
-	echo '<form action="linkAcc.php" method="post">Your password for the target server is NOT saved, it\'s used for one-time verification purposes only.<h3>(YOUR NAME)</h3>Username: <input type="text" name="userhere"><br>Password: <input type="password" name="passhere"><br><h3>Target server</h3>Username: <input type="text" name="usertarg"><br>Password: <input type="password" name="passtarg"><br>URL (dont change if you dont know what youre doing): <input type="text" name="server" value="http://www.boomlings.com/database/accounts/loginGJAccount.php"><br>Debug Mode (0=off, 1=on): <input type="text" name="debug" value="0"><br><input type="submit" value="Link Accounts"></form><br>Alternative servers to link to:<br>
-	http://www.boomlings.com/database/accounts/loginGJAccount.php - Robtops server<br>
-	http://joxlyn.7m.pl/gdps/database/accounts/loginGJAccount.php - Joxlyn GDPS<br>
-	http://pi.michaelbrabec.cz:9010/a/accounts/loginGJAccount.php - CvoltonGDPS<br>
-	http://teamhax.altervista.org/dbh/accounts/loginGJAccount.php - TeamHax GDPS';
+	echo '<form action="linkAcc.php" method="post">Your password for the target server is NOT saved, it\'s used for one-time verification purposes only.
+	<h3>This server</h3>
+	Username: <input type="text" name="userhere"><br>
+	Password: <input type="password" name="passhere"><br>
+	<h3>Target server</h3>
+	Username: <input type="text" name="usertarg"><br>
+	Password: <input type="password" name="passtarg"><br>
+	<details>
+		<summary>Advanced options</summary>
+		URL: <input type="text" name="server" value="http://www.boomlings.com/database/accounts/loginGJAccount.php"><br>
+		Debug Mode (0=off, 1=on): <input type="text" name="debug" value="0"><br>
+	</details>
+	<input type="submit" value="Link Accounts"></form>';
 }
 ?>
-<h3>Mini-guia de como vincular tu cuenta a este GDPS (Solo sirve cuando resubes tu nivel de GD a este GDPS haciendo que aparezca a tu nombre)</h3><br>
+h3>Mini-guia de como vincular tu cuenta a este GDPS (Solo sirve cuando resubes tu nivel de GD a este GDPS haciendo que aparezca a tu nombre)</h3><br>
     1. Crea una cuenta en el GDPS (No olvides tu contraseña y tu username)</br>
     2. Ingresa los datos de tu cuenta ya creada en donde dice "(YOUR NAME)" (Tal y como lo escribiste ya que es sensible a las mayusculas y minusculas)</br>
 	3. Target server significa que debes de ingresar los datos de la cuenta de los servidores de Robtop (Puedes cambiar la URL a otro servidor que esta en esta lista, por si quieres vincular de un GDPS a otro GDPS)</br>
