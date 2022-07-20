@@ -5,7 +5,7 @@ include "../lib/connection.php";
 require_once "../lib/exploitPatch.php";
 require_once "../lib/GJPCheck.php";
 if($maintenanceModeTOPSCORE) exit("-1");
-$ep = new exploitPatch();
+
 $stars = 0;
 $count = 0;
 $xi = 0;
@@ -17,27 +17,23 @@ if(empty($_POST["gameVersion"])){
 	$sign = "> 19";
 }
 if(!empty($_POST["accountID"])){
-	$accountID = $ep->remove($_POST["accountID"]);
-	$gjp = $ep->remove($_POST["gjp"]);
-	$GJPCheck = new GJPCheck(); //gjp check
-	$gjpresult = $GJPCheck->check($gjp,$accountID);
-	if($gjpresult != 1){
-		exit("-1");
-	}
+	$accountID = GJPCheck::getAccountIDOrDie();
 }else{
-	$accountID = $ep->remove($_POST["udid"]);
+	$accountID = ExploitPatch::remove($_POST["udid"]);
 	if(is_numeric($accountID)){
 		exit("-1");
 	}
 }
 
-$type = $ep->remove($_POST["type"]);
+$type = ExploitPatch::remove($_POST["type"]);
 if($type == "top" OR $type == "creators" OR $type == "relative"){
 	if($type == "top"){
-		$query = "SELECT * FROM users WHERE isBanned = '0' AND gameVersion $sign AND stars > 0 ORDER BY stars DESC LIMIT 100";
+		$query = $db->prepare("SELECT * FROM users WHERE isBanned = '0' AND gameVersion $sign AND stars > 0 ORDER BY stars DESC LIMIT 100");
+		$query->execute();
 	}
 	if($type == "creators"){
-		$query = "SELECT * FROM users WHERE isCreatorBanned = '0' ORDER BY creatorPoints DESC LIMIT 100";
+		$query = $db->prepare("SELECT * FROM users WHERE isCreatorBanned = '0' AND creatorPoints > 0 ORDER BY creatorPoints DESC LIMIT 100");
+		$query->execute();
 	}
 	if($type == "relative"){
 		$query = "SELECT * FROM users WHERE extID = :accountID";
@@ -47,12 +43,12 @@ if($type == "top" OR $type == "creators" OR $type == "relative"){
 		$user = $result[0];
 		$stars = $user["stars"];
 		if($_POST["count"]){
-			$count = $ep->remove($_POST["count"]);
+			$count = ExploitPatch::remove($_POST["count"]);
 		}else{
 			$count = 50;
 		}
 		$count = floor($count / 2);
-		$query = "SELECT	A.* FROM	(
+		$query = $db->prepare("SELECT	A.* FROM	(
 			(
 				SELECT	*	FROM users
 				WHERE stars <= :stars
@@ -71,10 +67,9 @@ if($type == "top" OR $type == "creators" OR $type == "relative"){
 				LIMIT $count
 			)
 		) as A
-		ORDER BY A.stars DESC";
+		ORDER BY A.stars DESC");
+		$query->execute([':stars' => $stars]);
 	}
-	$query = $db->prepare($query);
-	$query->execute([':stars' => $stars, ':count' => $count]);
 	$result = $query->fetchAll();
 	if($type == "relative"){
 		$user = $result[0];

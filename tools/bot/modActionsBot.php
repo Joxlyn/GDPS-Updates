@@ -1,4 +1,4 @@
-Mod actions:
+**ACCIONES DE LOS MODERADORES:**
 `|            Name | Actions count | Levels count | Last time online | Linked? |`
 `|-----------------|---------------|--------------|------------------|---------|`
 <?php

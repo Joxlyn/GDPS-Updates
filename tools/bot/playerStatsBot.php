@@ -1,10 +1,9 @@
 <?php
 include "../../incl/lib/connection.php";
 require_once "../../incl/lib/exploitPatch.php";
-$ep = new exploitPatch();
 require_once "../../incl/lib/mainLib.php";
 $gs = new mainLib();
-$playername = $ep->remove($_GET["player"]);
+$playername = ExploitPatch::remove($_GET["player"]);
 //checking who has blocked him
 $query = "SELECT * FROM users WHERE userName = :userName OR userID = :userName ORDER BY stars DESC LIMIT 1";
 $query = $db->prepare($query);
@@ -14,7 +13,7 @@ if($query->rowCount() == 0){
 	$query = $db->prepare($query);
 	$query->execute([':str' => $playername]);
 	if($query->rowCount() == 0){
-		exit("No account with this or a similiar name has been found");
+		exit("No se ha encontrado ninguna cuenta con este nombre o un nombre similar");
 	}
 }
 	$result = $query->fetchAll();
@@ -60,14 +59,14 @@ if($query->rowCount() == 0){
 		"\r\n**<:stargdps:878384596935393310> Stars:** ".$user["stars"].
 		"\r\n**<:coingdps:878383902060863608> Coins:** ".$user["coins"].
 		"\r\n**<:user_coin:878384539259535372> User Coins:** ".$user["userCoins"].
-		"\r\n**:diamond: Diamonds:** ".$user["diamonds"].
-		"\r\n**:hard_demon: Demons: **".$user["demons"].
-		"\r\n**:orbs: Orbs: **".$user["orbs"].
-		"\r\n**:checkon: Completed Levels: **".$user["completedLvls"].
-		"\r\n**:creatorpoint: Creator points:** ".$creatorpoints.
+		"\r\n**<:diamond:878384412314697748> Diamonds:** ".$user["diamonds"].
+		"\r\n**<:hard_demon:878384062283280434> Demons: **".$user["demons"].
+		"\r\n**<:orbs:878384472712691732> Orbs: **".$user["orbs"].
+		"\r\n**<:checkon:878459224030609408> Completed Levels: **".$user["completedLvls"].
+		"\r\n**<:creatorpoint:878383983073820762> Creator points:** ".$creatorpoints.
 		"\r\n**------------------------------------**".
-		"\r\n**Leaderboards rank:** ".$rank.
-		"\r\n**Creator leaderboards rank:** ".$crearank.
+		"\r\n**<:trofeo:878383137187565588> Leaderboards rank:** ".$rank.
+		"\r\n**<:TrofeoCreator:889212232930574356> Creator leaderboards rank:** ".$crearank.
 		"\r\n**------------------------------------**";
 		if($accinfo["youtubeurl"] != ""){
 			echo "\r\n**YouTube:** http://youtube.com/channel/".$accinfo["youtubeurl"];
@@ -79,8 +78,8 @@ if($query->rowCount() == 0){
 			echo "\r\n**Twitch:** http://twitch.tv/".$accinfo["twitch"]."";
 		}
 		if($discordID == 0){
-			echo "\r\n**Discord:** None";
+			echo "\r\n**<:BotonDiscord:889213229216170025> Discord:** None";
 		}else{
-			echo "\r\n**Discord:** " . $gs->getDiscordAcc($discordID) . " ($discordID)";
+			echo "\r\n**<:BotonDiscord:889213229216170025> Discord:** " . $gs->getDiscordAcc($discordID) . " ($discordID)";
 		}
 ?>

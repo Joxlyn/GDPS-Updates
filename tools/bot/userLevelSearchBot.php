@@ -2,19 +2,16 @@
 //error_reporting(0);
 include_once "../../incl/lib/connection.php";
 require_once "../../incl/lib/exploitPatch.php";
-$ep = new exploitPatch();
 require_once "../../incl/lib/mainLib.php";
 $gs = new mainLib();
-$str = $ep->remove($_POST["str"]);
+$str = ExploitPatch::remove($_POST["str"]);
 $difficulty = "";
 $original = "";
-
 //getting level data
-echo "***SHOWING RESULT FOR $str***\r\n";
+echo "***Mostrando resultado de la busqueda: $str***\r\n";
 include "../../incl/lib/connection.php";
-$query = $db->prepare("SELECT accountID FROM accounts WHERE userName = :str");
+$query = $db->prepare("SELECT accountID FROM accounts WHERE userName = :str OR userID = :str");
 $query->execute([':str' => $str]);
-
 //checking if exists
 if($query->rowCount() == 0){
 	exit("The user you are searching for doesn't exist");

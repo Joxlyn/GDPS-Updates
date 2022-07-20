@@ -1,11 +1,13 @@
 <?php
-$servername = "localhost";
-$username = "";
+$servername = "127.0.0.1";
+$port = 3306;
+$username = "root";
 $password = "";
-$dbname = "";
+$dbname = "geometrydash";
+
 
 #GDPS Stuff
-$maintenanceModeALL = 1; #1 = Servers ALL off; 0 = Servers ALL powered on
+$maintenanceModeALL = 0; #1 = Servers ALL off; 0 = Servers ALL powered on
 $maintenanceModeGETACCCOMMENTS = 0; #1 = Servers get AccComments off; 0 = Servers get AccComments powered on
 $maintenanceModeGETCOMMENTS = 0; #1 = Servers get Comments off; 0 = Servers get Comments powered on
 $maintenanceModeGETGAUNTLETS = 0; #1 = Servers get gauntlets off; 0 = Servers get gauntlets powered on
@@ -18,5 +20,6 @@ $maintenanceModeQUESTS = 0; #1 = Servers Quests off; 0 = Servers Quests powered 
 $maintenanceModeTOPSCORE = 0; #1 = Servers Top leaderboards off; 0 = Servers Top leaderboards powered on
 
 #Site Stuff
-$maintenanceModeGETSTATUS = 1; #1 = Servers getStatus off; 0 = Servers getStatus powered on
+$maintenanceModeGETSTATUS = 0; #1 = Servers getStatus off; 0 = Servers getStatus powered on
+
 ?>

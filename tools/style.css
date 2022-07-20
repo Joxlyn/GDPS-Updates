@@ -270,7 +270,7 @@ body
 
 /*forms*/
 
-.smain input[type=text], .smain input[type=password], .smain textarea
+.smain input[type=text], .smain input[type=password], .smain textarea,  .smain input[type=tel]
 {
 	display: inline-block;
 	border-radius: 12px;
@@ -287,7 +287,7 @@ body
 	overflow: visible;
 }
 
-.smain input[type=text]:focus, .smain input[type=password]:focus, .smain input[type=text]:hover, .smain input[type=password]:hover, .smain textarea:focus, .smain textarea:hover
+.smain input[type=text]:focus, .smain input[type=password]:focus, .smain input[type=text]:hover, .smain input[type=password]:hover, .smain textarea:focus, .smain textarea:hover, .smain input[type=tel]:focus
 {
 	transition: all 0.5s;
 	background-color: #ddd;

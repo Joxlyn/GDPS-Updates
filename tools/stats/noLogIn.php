@@ -1,12 +1,13 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Unused Accounts</title>
 		<link rel="stylesheet" href="../style.css"/>
 	</head>
-	
+
 	<body>
-		
-		
+
+
 		<div class="smain">
 <h1>Unused Accounts</h1>
 <table border="0"><tr><th>#</th><th>ID</th><th>Name</th><th>Registration date</th></tr>
